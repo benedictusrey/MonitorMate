@@ -1,0 +1,32 @@
+{
+  "audit_date": "2026-11-04",
+  "working_directory": "C:\\Users\\Benedictus\\Documents\\ChatGPT\\[Github Projects]\\MonitorMate-documentation-audit",
+  "note": "Recorded from tool command output; not a live app or hardware pass.",
+  "builds": [
+    {
+      "command": "dotnet build .\\src\\MonitorMate\\MonitorMate.csproj -c Debug --no-restore -t:Rebuild -p:PublishSingleFile=false -v:minimal",
+      "exit_code": 0,
+      "warnings": 0,
+      "errors": 0,
+      "msbuild_elapsed_seconds": 4.75
+    },
+    {
+      "command": "dotnet build .\\src\\MonitorMate\\MonitorMate.csproj -c Release --no-restore -t:Rebuild -p:PublishSingleFile=false -v:minimal",
+      "exit_code": 0,
+      "warnings": 0,
+      "errors": 0,
+      "msbuild_elapsed_seconds": 45.02
+    }
+  ],
+  "probes": {
+    "command": "dotnet run --project .\\probes\\Probes.csproj -p:PublishSingleFile=false",
+    "exit_code": 0,
+    "time_zone": "Tokyo Standard Time",
+    "reproduced": [
+      "SetValues/ResetToOriginal leave apply preferences tinted",
+      "Future manual hold returns false when IsCustomMix is false",
+      "Solar events can land on 2026-11-06 for requested local date 2026-11-04"
+    ],
+    "native_display_calls": false
+  }
+}

@@ -1,0 +1,42 @@
+# Local SDK, package caches and build output.
+/.dotnet/
+/.nuget/
+**/bin/
+**/obj/
+/.vs/
+/.idea/
+/.vscode/
+**/__pycache__/
+*.pyc
+/artifacts/
+
+# Rebuild binaries from source; keep delivery scripts.
+/dist/MonitorMate/
+/portable/*.exe
+/portable/*.dll
+/portable/*.pdb
+/portable/*.deps.json
+/portable/*.runtimeconfig.json
+/store/payload/
+*.msix
+*.msixbundle
+*.appx
+*.appxbundle
+*.zip
+
+# Local research and private state are not public project assets.
+/research/
+*.log
+*.pfx
+*.p12
+*.key
+*.cer
+*.user
+settings.json
+usage.json
+gamma-baselines.json
+diagnostics.txt
+
+# Local audit state.
+/test-data/
+/.taste-skill/

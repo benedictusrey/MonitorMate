@@ -1,0 +1,370 @@
+[
+  {
+    "path": "src/MonitorMate/app.manifest",
+    "sha256": "f297bf00601c6085fd51413adbbdc484f8c205d9328ef365588314221f9810a1"
+  },
+  {
+    "path": "src/MonitorMate/App.xaml",
+    "sha256": "4e094e1eac8bf39ec245b39cc19d02e20042ebd9142162b055c6fe74dde052de"
+  },
+  {
+    "path": "src/MonitorMate/App.xaml.cs",
+    "sha256": "46563f91b59b1fc5bb2af2412f6b7d2aa8d3f8f75b74ef1a36de59065b1024a3"
+  },
+  {
+    "path": "src/MonitorMate/Assets/Launch-MonitorMate.ps1",
+    "sha256": "1372db569309d25bf8de1449c222089a0b04949ce8767813074c2056160b8cfd"
+  },
+  {
+    "path": "src/MonitorMate/Assets/monitormate-1024.png",
+    "sha256": "f778db9dc3c17eb07c70ab098b0f8bc5c9554da67c1c22da029b137fdd0de4df"
+  },
+  {
+    "path": "src/MonitorMate/Assets/monitormate.ico",
+    "sha256": "26afd166e2fad951baeffa8c83ff400f17eb8adf4342477291a9bb5ae8327993"
+  },
+  {
+    "path": "src/MonitorMate/Controls/DayRibbon.cs",
+    "sha256": "58194b5d6428c43b9258154b3741dd410449957effa90fce2e48d428aabac021"
+  },
+  {
+    "path": "src/MonitorMate/Controls/MateFace.xaml",
+    "sha256": "634176129b9ef4b7dc700bf369589a63f403a8b16f8d3761168286669aa76d00"
+  },
+  {
+    "path": "src/MonitorMate/Controls/MateFace.xaml.cs",
+    "sha256": "85b64fb4e80570076134f1248c8fe89a4cbe6956a5ed144edcbfa038938c1eff"
+  },
+  {
+    "path": "src/MonitorMate/Controls/RingProgress.cs",
+    "sha256": "5a97ae2be6abc1c141d258732259b08d36fa963850cb2fff03fbd68e695ea0fd"
+  },
+  {
+    "path": "src/MonitorMate/Controls/WeeklyBars.cs",
+    "sha256": "1b22b652848749f79f32815f743e49e08af3ba8796fa9042571cb8499cf7d2d2"
+  },
+  {
+    "path": "src/MonitorMate/Converters/Converters.cs",
+    "sha256": "da25f9a9be2f6fde4a13a022ad9d6d7615a3f7a8bf15b53511af3525d9b8f0e4"
+  },
+  {
+    "path": "src/MonitorMate/Core/Interop/NativeMethods.cs",
+    "sha256": "bd516f8a5ef68739499db17b20dcfa1eb804b3038d64e956e4a07a0cc36f5d08"
+  },
+  {
+    "path": "src/MonitorMate/Core/Models/AppSettings.cs",
+    "sha256": "e8defa403ad8d98f03b2194be0df0695fb79ec847c5f267c59f3bd4e62ce207b"
+  },
+  {
+    "path": "src/MonitorMate/Core/Models/ComfortPreset.cs",
+    "sha256": "7b52c78575112cfa08de56f18296951d7a39247942f51885e2c71e100ca3ff7d"
+  },
+  {
+    "path": "src/MonitorMate/Core/Models/DisplayModels.cs",
+    "sha256": "66ab3bb40d399d9b7f285fddcc261f1de749a0fea3aaef9ae8f947d77cec728f"
+  },
+  {
+    "path": "src/MonitorMate/Core/Models/GammaModels.cs",
+    "sha256": "f96b4421ed11c17bd6065fb20aaf0e1302e766deaca39a2cd66e76d9ff0fb40f"
+  },
+  {
+    "path": "src/MonitorMate/Core/Models/ReminderModels.cs",
+    "sha256": "08a1530ce732e5e4593b72bc7295010da3c543bbba5e10d914e78bceb3cd31bd"
+  },
+  {
+    "path": "src/MonitorMate/Core/Models/UsageModels.cs",
+    "sha256": "a923f39cf6a1aadbdfc983bb31b3d052fd1ba94704111fdc19c4ef0ccd3efbcf"
+  },
+  {
+    "path": "src/MonitorMate/Core/Mvvm/ObservableObject.cs",
+    "sha256": "2ad207a860809ac5b7cc803b3eec9e88aa301fb026c0696ec3ceead56ae38034"
+  },
+  {
+    "path": "src/MonitorMate/Core/Mvvm/RelayCommand.cs",
+    "sha256": "01e07c8a959f2acdb9c86d04a722b88ba8fa5963fdff03b6070f8a15e3753216"
+  },
+  {
+    "path": "src/MonitorMate/Core/Services/ActivityProbe.cs",
+    "sha256": "d707e6fc297f5acd920c2f1ffa5f3676e123654403ee0b04bbef332d59c02c03"
+  },
+  {
+    "path": "src/MonitorMate/Core/Services/AppEnvironment.cs",
+    "sha256": "1c5637b6469b1aa8fc94717b222e5c23be9111bc49f2311ab37f848a5d61a665"
+  },
+  {
+    "path": "src/MonitorMate/Core/Services/AppLaunch.cs",
+    "sha256": "da40bc3e65390a7f39bf9f67339d661eaba59e567928f229e07a222d5ebb549b"
+  },
+  {
+    "path": "src/MonitorMate/Core/Services/AppPaths.cs",
+    "sha256": "f2530fc6571f6278199625142fed2d5a454f14d480e6f9b29436be418bd1bd19"
+  },
+  {
+    "path": "src/MonitorMate/Core/Services/AppServices.cs",
+    "sha256": "1c7b37b5304210ca23ec30b4f3b3dc6abf5d6c6347f10049c8ad90798a2caf57"
+  },
+  {
+    "path": "src/MonitorMate/Core/Services/ComfortService.cs",
+    "sha256": "bbb49c36206fefcdc380265bc291f71deee7b415689b283af8bf9d2a83b75920"
+  },
+  {
+    "path": "src/MonitorMate/Core/Services/DisplayService.cs",
+    "sha256": "4a0943bcb1a44d4da3ce2beb7cc5b79819c1aec1bcd7ff03d2b089fe372fb9f0"
+  },
+  {
+    "path": "src/MonitorMate/Core/Services/FocusSessionService.cs",
+    "sha256": "22b5591ff67e7fea838ec7d2d962cfe348d4ad515a354274d49baf0276ffb95b"
+  },
+  {
+    "path": "src/MonitorMate/Core/Services/GammaService.cs",
+    "sha256": "2dd37427018c32d64b2db8b74d4a93305b189174e435c08cabc0c8204729f5a2"
+  },
+  {
+    "path": "src/MonitorMate/Core/Services/HotkeyGesture.cs",
+    "sha256": "dfb2231814d1b643035ccbf9fa62c9b84796906224f664331fde71e250b427cc"
+  },
+  {
+    "path": "src/MonitorMate/Core/Services/HotkeyService.cs",
+    "sha256": "1627dad466b271a67ce0db0342c029d643b9ff9559d6cbcfea85856c958d6d9b"
+  },
+  {
+    "path": "src/MonitorMate/Core/Services/LogService.cs",
+    "sha256": "421ce833cf687b031f0aaf0d11e445e00bf1509ab0ccaf0da45c5ce5cb7add54"
+  },
+  {
+    "path": "src/MonitorMate/Core/Services/OverlayService.cs",
+    "sha256": "e77e2d0288892dd54fa5901fe22713a62674346c240a7f9d49e9c03961020d79"
+  },
+  {
+    "path": "src/MonitorMate/Core/Services/OverlayWindowHelper.cs",
+    "sha256": "a6dd0ffe5e76fab66819110301b03cceb6d66d7e73b08aeef4ed4bd0fb8123e0"
+  },
+  {
+    "path": "src/MonitorMate/Core/Services/ReminderService.cs",
+    "sha256": "1a129e08841124cfab37ae4753c912d9203fc14240d341318c0425a6d83faa84"
+  },
+  {
+    "path": "src/MonitorMate/Core/Services/ScheduleService.cs",
+    "sha256": "14806319bd49638a22ad5c06009f2d8762aed94795907a6def5ae43b82edee13"
+  },
+  {
+    "path": "src/MonitorMate/Core/Services/SettingsService.cs",
+    "sha256": "ee78e5cf178ec635a35a8b8a611638c0aab49ef1b9e7a35a3086e13edb72e355"
+  },
+  {
+    "path": "src/MonitorMate/Core/Services/SolarCalculator.cs",
+    "sha256": "d48fd18e9f73f28195d386e7b2f07fcef8cc9209b88666876bcdb4a8fae42c6e"
+  },
+  {
+    "path": "src/MonitorMate/Core/Services/StartupService.cs",
+    "sha256": "cdd2ad7e3719e4bca79c6c94e2f109c35d2010d9e37d81ecbf4e9f20c60adff9"
+  },
+  {
+    "path": "src/MonitorMate/Core/Services/TrayService.cs",
+    "sha256": "b865cf34932abd3f142c4048d9be7fb13fdf98201fa481cfa43f3b1d7d259ec8"
+  },
+  {
+    "path": "src/MonitorMate/Core/Services/UsageStore.cs",
+    "sha256": "cfad05ef8f3d16b0fd7c8f08192826f7fed4da1fbe5bdb4f88a393e67ec24935"
+  },
+  {
+    "path": "src/MonitorMate/Core/Services/UsageTracker.cs",
+    "sha256": "45442a59fd81df07c2ef9ade2465699030392dac604d7b41e410064a3057d3f7"
+  },
+  {
+    "path": "src/MonitorMate/Core/ViewModels/ActivityViewModel.cs",
+    "sha256": "60464b4ac9762f3aec11ad1eac42e11cbb4a701984b08047f7d004d5809548a3"
+  },
+  {
+    "path": "src/MonitorMate/Core/ViewModels/BreaksViewModel.cs",
+    "sha256": "e3d4a08cb712cd58d947ca4375293977a46e0666163cc2ee969728c203c5076d"
+  },
+  {
+    "path": "src/MonitorMate/Core/ViewModels/ComfortViewModel.cs",
+    "sha256": "3c0ed358127745dd6f932fc590c1255abd6556e6a2c85e2c3d2c5ca4699c74b8"
+  },
+  {
+    "path": "src/MonitorMate/Core/ViewModels/DisplayCardViewModel.cs",
+    "sha256": "e280ae7297eae69addf03680c700a7f1269c79e0cc7058558ad1efb15176e4ed"
+  },
+  {
+    "path": "src/MonitorMate/Core/ViewModels/DisplaysViewModel.cs",
+    "sha256": "d3e606f2cfe6924b728f75f88ed9c1bb20157e6cb40ae64aeb2d117a102b2130"
+  },
+  {
+    "path": "src/MonitorMate/Core/ViewModels/FocusViewModel.cs",
+    "sha256": "d5fb2e51497fd4142953966f75bd06c772b0857f2b66fa8af003b13a49180c80"
+  },
+  {
+    "path": "src/MonitorMate/Core/ViewModels/MainViewModel.cs",
+    "sha256": "4d53f838ed3ac685a840c1702a11279e7843be96c3ed7eb6a083529b1c7f178a"
+  },
+  {
+    "path": "src/MonitorMate/Core/ViewModels/NavItem.cs",
+    "sha256": "5177075a8c92960dae0402d99b01cf4856c8f20653ec6553b3c707cc405acdee"
+  },
+  {
+    "path": "src/MonitorMate/Core/ViewModels/Overlays/BreakOverlayViewModel.cs",
+    "sha256": "bc0080703b6fbe80bb59c2c4b047a8fe1b0c1da7d2ef9994b1f367a59fdbe5c1"
+  },
+  {
+    "path": "src/MonitorMate/Core/ViewModels/Overlays/FocusOverlayViewModel.cs",
+    "sha256": "0b3e7eee442e2e764bbbe3383f48c4165a7cb402ade63abd1d370418fa7dd3a7"
+  },
+  {
+    "path": "src/MonitorMate/Core/ViewModels/Overlays/ToastViewModel.cs",
+    "sha256": "9f17380255ffcbcce9cac1af70f336f97dd7f490e9f61425f0cdadc1546f83aa"
+  },
+  {
+    "path": "src/MonitorMate/Core/ViewModels/PresetOptionViewModel.cs",
+    "sha256": "9dfcbc7f931e7c0d0eb4aae4c54cb89dbf12a1a61fef73fcf39fcccfb4e55146"
+  },
+  {
+    "path": "src/MonitorMate/Core/ViewModels/SettingsViewModel.cs",
+    "sha256": "103c99ec2e117b9af81acfcf9f771342584576d15884974a34a2e2f3e8be0400"
+  },
+  {
+    "path": "src/MonitorMate/Core/ViewModels/TodayViewModel.cs",
+    "sha256": "3de1ee29bc6ee45caffa7a0c7e3dc032d44ae2340d3a436de75c007f0db1eae2"
+  },
+  {
+    "path": "src/MonitorMate/GlobalUsings.cs",
+    "sha256": "1722fce7429bf6a97267a9630d97326c94eb1eb1a16667d8c9d7884ac983e398"
+  },
+  {
+    "path": "src/MonitorMate/MainWindow.xaml",
+    "sha256": "4e7b28860f7684ddbed20036798beb0a9e52ca017fc4d67ab4b48750bff3b0aa"
+  },
+  {
+    "path": "src/MonitorMate/MainWindow.xaml.cs",
+    "sha256": "00fb30dfa398c7a93d09bcd27d33310566a2f2a5f916110426e2181865eaebfd"
+  },
+  {
+    "path": "src/MonitorMate/MonitorMate.csproj",
+    "sha256": "93266807fd81bdbf9bfc395e8a4d96e3e76fcbeb31d2a33ddb3db318c2e6faa3"
+  },
+  {
+    "path": "src/MonitorMate/Themes/Colors.xaml",
+    "sha256": "342878d3585d1257707f6d73ee95a4667b6d41f9328a036c1dc15f54b4b72db6"
+  },
+  {
+    "path": "src/MonitorMate/Themes/Controls.xaml",
+    "sha256": "5bb41dcd6d3d8b44d0bb31938c6b7340b9066d53b3e8287c0452bd409e4014c0"
+  },
+  {
+    "path": "src/MonitorMate/Themes/Converters.xaml",
+    "sha256": "be0e0e9eb908e837e82183b7e1cb31e109a355a3767b9cd72ed30b29954399d3"
+  },
+  {
+    "path": "src/MonitorMate/Themes/Icons.xaml",
+    "sha256": "1114e2bf15b7ba8f877c3656a514f361edf5d6b60a01d56bf027730389dca677"
+  },
+  {
+    "path": "src/MonitorMate/Themes/Typography.xaml",
+    "sha256": "145ac1f8746fcd4df15070ec156996d912df435c201ec2b34eb147840a435110"
+  },
+  {
+    "path": "src/MonitorMate/Views/ActivityView.xaml",
+    "sha256": "f428d9bf30ff67f7da6e709d8f5444489ad69cd4c862d4024050e19ef005f53b"
+  },
+  {
+    "path": "src/MonitorMate/Views/ActivityView.xaml.cs",
+    "sha256": "430dc5edc677d2d88f59ec02c7968cc9102831459acb3a2e174542cb3834b422"
+  },
+  {
+    "path": "src/MonitorMate/Views/BreaksView.xaml",
+    "sha256": "aeb18cfc642f541dd949c3ce05673012a31fd59ff48d521f4c443f1cb9c0b58c"
+  },
+  {
+    "path": "src/MonitorMate/Views/BreaksView.xaml.cs",
+    "sha256": "5f9cd258ca476c58407a4c6c9c9b2e0ea6b0aed68e8601bea9c7e4d17d5fcaab"
+  },
+  {
+    "path": "src/MonitorMate/Views/ComfortView.xaml",
+    "sha256": "1923e480aaa144e99a565b7f0b43fc9538ae3bfe860cd2fb68271ba8ee4572d9"
+  },
+  {
+    "path": "src/MonitorMate/Views/ComfortView.xaml.cs",
+    "sha256": "8ddb437b80b25085b7f89ab05ef9aee74071cecfd50d7277c39de29a50e81ff0"
+  },
+  {
+    "path": "src/MonitorMate/Views/ConfirmDialog.xaml",
+    "sha256": "ddde0acd8ee7eedfc0987c250d3a41d9113d281a726db872b3176258f7d10463"
+  },
+  {
+    "path": "src/MonitorMate/Views/ConfirmDialog.xaml.cs",
+    "sha256": "d2efdfce73df07b33e363ecebf644b9a3e49d9bfaeff6eec3529851afc83f787"
+  },
+  {
+    "path": "src/MonitorMate/Views/DisplaysView.xaml",
+    "sha256": "f6aaac1bc907847c61cd24b7a50e1cf5a1d07c26a0e777321cdc3175d6247b52"
+  },
+  {
+    "path": "src/MonitorMate/Views/DisplaysView.xaml.cs",
+    "sha256": "5bb2ef068f84aff5b7cc2be85377951cd4a9b6f9f06c78b0bb793f8c3e05b1d3"
+  },
+  {
+    "path": "src/MonitorMate/Views/FocusView.xaml",
+    "sha256": "4b57cb9755bfcf1860bd24c640751a4a15b32a66f78e58a060c11a2578b2f326"
+  },
+  {
+    "path": "src/MonitorMate/Views/FocusView.xaml.cs",
+    "sha256": "d4ad9610db9f8add4a4d1d06589f6502d1b416065b02db911291f5e8bdc49086"
+  },
+  {
+    "path": "src/MonitorMate/Views/Overlays/BreakOverlayWindow.xaml",
+    "sha256": "3184a67de3278c89183cd9fc8ca909c6e0b036908933655ae0cd3c434ec7e838"
+  },
+  {
+    "path": "src/MonitorMate/Views/Overlays/BreakOverlayWindow.xaml.cs",
+    "sha256": "0c60d4b0dfb552a8e13471011787ba951ccb7b7566156c99e2682069970ceee7"
+  },
+  {
+    "path": "src/MonitorMate/Views/Overlays/FocusOverlayWindow.xaml",
+    "sha256": "63e6dc1e380aae54a2c5c4c92536962ed1e1551d6a9ee83bca68994a0cbd833a"
+  },
+  {
+    "path": "src/MonitorMate/Views/Overlays/FocusOverlayWindow.xaml.cs",
+    "sha256": "690177365e27f9142266c422ec7ba6ea7a37bd702449dbd05fef791aa4936081"
+  },
+  {
+    "path": "src/MonitorMate/Views/Overlays/GentleBreakWindow.xaml",
+    "sha256": "bd52019e92977b8864183512e6b487b29e8e891d86a9b5c5183153368353300c"
+  },
+  {
+    "path": "src/MonitorMate/Views/Overlays/GentleBreakWindow.xaml.cs",
+    "sha256": "9fe3ac7c691e020a50ea5454452e0e57236cc01f23885f58f05d973dda10b109"
+  },
+  {
+    "path": "src/MonitorMate/Views/Overlays/IdentifyOverlayWindow.xaml",
+    "sha256": "95944b4df6e8cbfc0448a20e9eb1bab0d937fb0b98bd0472c369ccbbcf16afb9"
+  },
+  {
+    "path": "src/MonitorMate/Views/Overlays/IdentifyOverlayWindow.xaml.cs",
+    "sha256": "c8f6bd36ebe2829df976a388944392abd81efafbc7736444109e2b67a64f788a"
+  },
+  {
+    "path": "src/MonitorMate/Views/Overlays/ToastWindow.xaml",
+    "sha256": "0cdfabe8856cae4797191e0eeb9356edfee0b9e1b70930c0d3224aaf542634c3"
+  },
+  {
+    "path": "src/MonitorMate/Views/Overlays/ToastWindow.xaml.cs",
+    "sha256": "033173de6cc5143cfc8650a890553b71eadf8f324e9ecdd9aafd87ccb151930c"
+  },
+  {
+    "path": "src/MonitorMate/Views/SettingsView.xaml",
+    "sha256": "7e8c434215081abee3b3025f9bf38defed59c84d303649ab4f541d15e5881826"
+  },
+  {
+    "path": "src/MonitorMate/Views/SettingsView.xaml.cs",
+    "sha256": "2703f8a0e62fadd5425c8bbb9316fd33302e2a90741c72c0042190c9e9190d0f"
+  },
+  {
+    "path": "src/MonitorMate/Views/TodayView.xaml",
+    "sha256": "c9c31ecb57da3bde9c9570ac706402828939df701f96d7fc641c6d0e5dfd6236"
+  },
+  {
+    "path": "src/MonitorMate/Views/TodayView.xaml.cs",
+    "sha256": "d525f57a7cb39b9402bb15af926bf1f89fa534df63fa64aebc3a4e227eeb0898"
+  }
+]

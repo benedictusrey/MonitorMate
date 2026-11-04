@@ -1,0 +1,36 @@
+name: Build and documentation
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        configuration: [Debug, Release]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+      - name: Compile
+        run: dotnet build src/MonitorMate/MonitorMate.csproj -c ${{ matrix.configuration }} -p:PublishSingleFile=false
+      - name: Check documentation parser
+        run: python tools/check_docs.py --self-test
+      - name: Run display-policy and persistence regression checks
+        run: dotnet run --project tests/MonitorMate.Regression/MonitorMate.Regression.csproj -c ${{ matrix.configuration }} -p:PublishSingleFile=false
+      - name: Verify manual mode and automatic display consent
+        run: dotnet run --project tests/MonitorMate.AutomationConsent/MonitorMate.AutomationConsent.csproj -c ${{ matrix.configuration }} -p:PublishSingleFile=false
+      - name: Render and verify all Windows page templates
+        run: dotnet run --project tests/MonitorMate.UiAudit/MonitorMate.UiAudit.csproj -p:PublishSingleFile=false
+      - name: Verify restart cleanup before handoff
+        run: dotnet run --project tests/MonitorMate.Restart/MonitorMate.Restart.csproj -c ${{ matrix.configuration }} -p:PublishSingleFile=false
+      - name: Verify packaging and upgrade failure handling
+        run: python -m unittest discover -s tests -p "test_*.py"
+      - name: Check local links and four-image README
+        run: python tools/check_docs.py

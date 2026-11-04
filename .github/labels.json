@@ -1,0 +1,9 @@
+[
+  {"name": "bug", "color": "d73a4a", "description": "Reproducible application defect"},
+  {"name": "enhancement", "color": "a2eeef", "description": "Concrete feature or workflow request"},
+  {"name": "documentation", "color": "0075ca", "description": "Documentation or asset correction"},
+  {"name": "accessibility", "color": "7057ff", "description": "Keyboard, screen reader, scaling or contrast"},
+  {"name": "P1", "color": "b60205", "description": "Release blocker affecting display state, exits or packaging"},
+  {"name": "P2", "color": "d93f0b", "description": "Correctness or recovery defect"},
+  {"name": "P3", "color": "fbca04", "description": "Lower-priority documentation or polish"}
+]

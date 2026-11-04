@@ -1,0 +1,44 @@
+[
+  {
+    "key": "overview",
+    "prompt": "Create one polished wide product promotional image, 1536x1024 if supported, for MonitorMate, a Windows display comfort utility. Reference image is an authentic app screenshot, use its exact app identity, icon, olive-black, ivory, persimmon, sand and celadon palette. Show a large crisp front-facing app window containing the referenced Today page, preserve visible layout and controls as faithfully as possible. Frame it on an understated olive-black studio background with subtle physical monitor-inspired material and generous margins. Editorial typography outside the screenshot: 'MonitorMate' and 'Light. Breaks. Focus.' only. No fake users, performance statistics, ratings, medical claims, extra features or logos. The screenshot is reference material, do not depict the promotional composition as a real app capture. Refined compact desktop instrument feeling. One clear focal point, ivory lettering, restrained persimmon accent, no neon, no decorative grid.",
+    "reference": "docs/screenshots/today.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGB",
+    "tool": "built-in image_gen.imagegen",
+    "generated_date": "2026-11-04",
+    "reference_sha256": "8c22773ca8deaf273b8c89507c8d622b8ef52b7a1694368c08b44d758630de56",
+    "output_sha256": "acb76bfe47fae6edfad34a120d8f18be3eaa927d341ae4745eab48147d865409",
+    "output": "docs/images/monitormate-overview.png",
+    "bytes": 1646227
+  },
+  {
+    "key": "comfort",
+    "prompt": "Create one polished wide product promotional image, 1536x1024 if supported, for MonitorMate using the supplied authentic Comfort page screenshot as reference. A large crisp front-facing Comfort app window should dominate, faithfully preserve six presets and daily rhythm controls, original MonitorMate icon and identity. Olive-black background, ivory type, restrained warm persimmon and sand accents inspired directly by the app. Place outside-window heading 'MonitorMate' and subtitle 'Light that follows your day.' Arrange subtle warm-to-cool environmental lighting behind the window to express daylight, evening and night without inventing functionality. No medical benefit claims, no badges, no fake statistics, no testimonials, no new UI. This is a promotional illustration based on a screenshot, not evidence of a running app.",
+    "reference": "docs/screenshots/comfort.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGB",
+    "tool": "built-in image_gen.imagegen",
+    "generated_date": "2026-11-04",
+    "reference_sha256": "197d04da965553e762f47a6483f0e614264a3b4197221799fab7419497708817",
+    "output_sha256": "4beee3c64b957b9dff1b0ebd8bfc55a8b8e790eb3f75719d26fed576d2b767fe",
+    "output": "docs/images/monitormate-comfort.png",
+    "bytes": 1749153
+  },
+  {
+    "key": "focus",
+    "prompt": "Create one polished wide product promotional image, 1536x1024 if supported, for MonitorMate using supplied authentic Focus page screenshot as reference. Preserve original app identity, icon, dark olive and ivory interface, persimmon accent, reading band preview and 25:00 session ring. Large crisp front-facing app window occupies most composition. Refined dark desk-instrument framing with a quiet horizontal pool of light echoing reading band, no desk clutter. Editorial text outside the app: 'MonitorMate' and 'Room for one thing.' only. Do not invent features, medical benefits, usage metrics, awards, testimonials or UI. Preserve screenshot layout as faithfully as possible. A promotional illustration based on screenshot, not a runtime verification image.",
+    "reference": "docs/screenshots/focus.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGB",
+    "tool": "built-in image_gen.imagegen",
+    "generated_date": "2026-11-04",
+    "reference_sha256": "23adb39fe4309ea848f15c93c47c8dc3987f149a1a7685cf06581430d724dd9a",
+    "output_sha256": "7076f91a8605e6ba1b5e4ec63e36df8ce1fec1c534c9a5869039f9b0ef7f97f7",
+    "output": "docs/images/monitormate-focus.png",
+    "bytes": 1622482
+  }
+]

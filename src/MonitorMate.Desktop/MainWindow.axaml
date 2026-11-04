@@ -1,0 +1,52 @@
+<Window xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="MonitorMate.Desktop.MainWindow" Icon="/Assets/monitormate.png" Title="MonitorMate · Reminder preview" Width="820" Height="700" MinWidth="680" MinHeight="590">
+<Grid RowDefinitions="Auto,*,Auto" Margin="28">
+ <Grid ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,20">
+  <Image Source="/Assets/monitormate.png" Width="38" Height="38" Margin="0,0,12,0"/>
+  <StackPanel Grid.Column="1"><TextBlock Text="MonitorMate" FontSize="20" FontWeight="SemiBold"/><TextBlock Text="Reminder preview" FontSize="12" Classes="secondary"/></StackPanel>
+  <TextBlock Grid.Column="2" Text="Benedictus RH" Classes="secondary" VerticalAlignment="Center" FontSize="12"/>
+ </Grid>
+ <TabControl Grid.Row="1" x:Name="Pages">
+  <TabItem Header="Today"><ScrollViewer><StackPanel Spacing="18" Margin="0,20,0,0">
+   <StackPanel Spacing="6"><TextBlock Text="Make room for a break" Classes="title"/><TextBlock Text="A quiet rhythm while MonitorMate is open. Start when you are ready." Classes="secondary"/></StackPanel>
+   <Border Classes="panel"><StackPanel Spacing="16">
+    <TextBlock x:Name="PhaseText" Text="Ready to begin" FontSize="18"/>
+    <TextBlock x:Name="CountdownText" Text="20:00" FontSize="40" FontWeight="Light" AutomationProperties.Name="Time remaining"/>
+    <ProgressBar x:Name="TimeProgress" Height="4" Minimum="0" Maximum="1" Value="0" Foreground="#D8B36A"/>
+    <WrapPanel Orientation="Horizontal">
+     <Button x:Name="StartButton" Content="Start reminders" Classes="primary" Click="Start_Click" Margin="0,0,8,8"/>
+     <Button x:Name="PauseButton" Content="Pause" Click="Pause_Click" IsEnabled="False" Margin="0,0,8,8"/>
+     <Button x:Name="StopButton" Content="Stop" Click="Stop_Click" IsEnabled="False" Margin="0,0,8,8"/>
+     <Button x:Name="BreakButton" Content="Take a break" Click="Break_Click" Margin="0,0,0,8"/>
+    </WrapPanel>
+    <TextBlock x:Name="CompletedText" Text="0 breaks completed" Classes="secondary"/>
+   </StackPanel></Border>
+   <Border Classes="panel"><StackPanel Spacing="8"><TextBlock Text="Your display stays yours" FontSize="16" FontWeight="SemiBold"/><TextBlock Text="This preview sends no brightness or colour commands. Use your system or monitor controls to adjust the screen." Classes="secondary"/></StackPanel></Border>
+  </StackPanel></ScrollViewer></TabItem>
+  <TabItem Header="Rhythm"><ScrollViewer><StackPanel Spacing="18" Margin="0,20,0,0">
+   <TextBlock Text="Set your rhythm" Classes="title"/>
+   <TextBlock Text="Choose the time between breaks and how long to rest. Changes apply when you start again." Classes="secondary"/>
+   <Border Classes="panel"><StackPanel Spacing="16">
+    <TextBlock Text="Work interval · minutes (1–240)"/><NumericUpDown x:Name="WorkMinutesInput" AutomationProperties.Name="Work interval in minutes" Minimum="1" Maximum="240" Increment="1" FormatString="0" Value="20"/>
+    <TextBlock Text="Break length · seconds (5–600)"/><NumericUpDown x:Name="BreakSecondsInput" AutomationProperties.Name="Break length in seconds" Minimum="5" Maximum="600" Increment="1" FormatString="0" Value="20"/>
+    <WrapPanel><Button Content="20-20-20" Click="ShortRhythm_Click" Margin="0,0,8,8"/><Button Content="Pomodoro" Click="Pomodoro_Click" Margin="0,0,8,8"/><Button Content="Deep work" Click="DeepWork_Click" Margin="0,0,0,8"/></WrapPanel>
+    <Button x:Name="SaveButton" Content="Save rhythm" Classes="primary" Click="Save_Click"/>
+   </StackPanel></Border>
+   <TextBlock Text="No idle detection: pause reminders when you step away. After a delayed timer tick, the app pauses rather than counting unattended breaks." Classes="secondary"/>
+  </StackPanel></ScrollViewer></TabItem>
+  <TabItem Header="Capabilities"><ScrollViewer><StackPanel Spacing="18" Margin="0,20,0,0">
+   <TextBlock Text="What this preview does" Classes="title"/>
+   <Border Classes="panel"><StackPanel Spacing="12">
+    <TextBlock Text="Available" FontSize="16" FontWeight="SemiBold"/>
+    <TextBlock Text="Timed reminders, pause/resume, skippable break windows, saved rhythm and a local completed-break total." Classes="secondary"/>
+    <TextBlock Text="Not implemented in this preview" FontSize="16" FontWeight="SemiBold"/>
+    <TextBlock Text="Hardware brightness, gamma warmth, display schedules, focus overlays, global shortcuts, tray background mode, screen-time tracking, automatic startup and idle detection." Classes="secondary"/>
+    <TextBlock Text="Closing the app stops reminders. No administrator, screen-capture or device permission is requested." Classes="secondary"/>
+    <Button Content="Display control unavailable" IsEnabled="False" AutomationProperties.HelpText="This preview has no native display-control backend."/>
+   </StackPanel></Border>
+   <TextBlock Text="Windows users can use the separate full Windows app. Linux and macOS preview features are intentionally smaller." Classes="secondary"/>
+   <TextBlock Text="MonitorMate 1.0.0 preview · MIT License · Benedictus RH (@benedictusrey)" FontSize="12" Classes="secondary"/>
+  </StackPanel></ScrollViewer></TabItem>
+ </TabControl>
+ <TextBlock Grid.Row="2" x:Name="StatusText" Text="Ready. Reminders start only when you choose Start reminders." Classes="secondary" FontSize="12" Margin="0,16,0,0" AutomationProperties.LiveSetting="Polite"/>
+</Grid>
+</Window>

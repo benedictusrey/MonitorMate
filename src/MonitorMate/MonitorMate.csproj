@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <!-- No unsigned apphost: the app is launched as a DLL through dotnet.exe. -->
+    <UseAppHost>false</UseAppHost>
+    <ApplicationIcon>Assets\monitormate.ico</ApplicationIcon>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>MonitorMate</RootNamespace>
+    <AssemblyName>MonitorMate</AssemblyName>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <PlatformTarget>x64</PlatformTarget>
+    <Platforms>x64</Platforms>
+    <Version>1.0.0</Version>
+    <Authors>Benedictus RH</Authors>
+    <Company>Benedictus RH</Company>
+    <Product>MonitorMate</Product>
+    <Description>Thoughtful display comfort for long days at the screen.</Description>
+    <Copyright>Copyright © 2026 Benedictus RH</Copyright>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <NoWarn>$(NoWarn);WFO0003</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>false</SelfContained>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Remove="System.Drawing" />
+    <Using Remove="System.Windows.Forms" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\monitormate.ico" />
+    <None Include="Assets\monitormate.ico" Link="MonitorMate.ico"
+          CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Include="Assets\Launch-MonitorMate.ps1" Link="Launch-MonitorMate.ps1"
+          CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="../../licenses/**" Link="licenses/%(RecursiveDir)%(Filename)%(Extension)" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="../../LICENSE" Link="MonitorMate-LICENSE.txt" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="../../THIRD_PARTY_NOTICES.md" Link="MonitorMate-THIRD-PARTY-NOTICES.md" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,10 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:MonitorMate.Converters">
+    <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+    <converters:EnumToBooleanConverter x:Key="EnumToBoolean" />
+    <converters:InverseBooleanToVisibilityConverter x:Key="InverseBoolToVisibility" />
+    <converters:SliderFillConverter x:Key="SliderFill" />
+    <converters:InverseBooleanConverter x:Key="InverseBool" />
+    <converters:StringToVisibilityConverter x:Key="StringToVisibility" />
+</ResourceDictionary>

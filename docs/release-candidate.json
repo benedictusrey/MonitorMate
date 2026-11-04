@@ -1,0 +1,181 @@
+{
+  "status": "release held",
+  "license": "MIT",
+  "author": "Benedictus RH (@benedictusrey)",
+  "regression_checks": 17,
+  "restart_checks": 1,
+  "script_checks": 2,
+  "native_ui_verified": false,
+  "linux_macos_implemented": false,
+  "published": false,
+  "changed_files": [
+    {
+      "path": ".github/repository-metadata.json",
+      "sha256": "bf6489ffdb54a2c5fc90ebb968bf49a24edb82c638cc8b6ef523ce97706231e6"
+    },
+    {
+      "path": ".github/workflows/build.yml",
+      "sha256": "c804c27e2433a371161e443d6fedc0f72d41fbf79ccf5a8e97c69469e5c79858"
+    },
+    {
+      "path": "AUTHORS.md",
+      "sha256": "9fe83d82547cb0c97587b0e786ef569083833d6886f8484292b5c31ec20074c6"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256": "bc9a7412cb2194a38dfefd19e743db381f15b035781527b4e7e969678e0ca3d1"
+    },
+    {
+      "path": "dist/Install-MonitorMate.ps1",
+      "sha256": "a5b4e79219f3e944ad887089088f43bfbf7138911d34fd03ea7c70f584ec5b75"
+    },
+    {
+      "path": "docs/AUDIT.md",
+      "sha256": "f055a1887756e7156474935b2d558a8283fce5420e9594d60ed8971f46b6f162"
+    },
+    {
+      "path": "docs/DOCUMENTATION_INDEX.md",
+      "sha256": "5bbbb4a86846ed73290fb9bed3fc48035fb4ab79349ce53b05fb3f25c0ee7069"
+    },
+    {
+      "path": "docs/GITHUB_PREPARATION.md",
+      "sha256": "1950f943577676689a2b43906e8208e6c71d6638b962ee155d18260ae993686a"
+    },
+    {
+      "path": "docs/INSTALLATION.md",
+      "sha256": "82f3115bfbf3437876da9cf6167d59b4565c054450ed9d67653a4f630351df93"
+    },
+    {
+      "path": "docs/licenses/MIT.txt",
+      "sha256": "32de6ca865fd1e39960567fe1be7352f5e2fa4f0d3f9d4e8a02c773eee4ec055"
+    },
+    {
+      "path": "docs/LICENSING.md",
+      "sha256": "8e3e04c92bfa5cf44f855a20a0b38e906ebd0a550cad016a67dd4076af86f407"
+    },
+    {
+      "path": "docs/PLAN.md",
+      "sha256": "909822ae65842845aa7294e772e6af10d85aa10b0ce5856699df572f158367be"
+    },
+    {
+      "path": "docs/RELEASE_MODEL.md",
+      "sha256": "af8ed6ba9a9f786cd9eca4ee63b1271702c6edb11a870b3d58a2986ab5849a38"
+    },
+    {
+      "path": "docs/RELEASE_READINESS.md",
+      "sha256": "dcef7c4f2cf076fae8db2de2cb08f02934cf652b460b45152edf692d086cfcbf"
+    },
+    {
+      "path": "docs/VERIFICATION.md",
+      "sha256": "f75a11c702773c92f5159fddf31930e88ad43b31fefaa979ee727233220ad313"
+    },
+    {
+      "path": "GLOSSARY.md",
+      "sha256": "d313afc5781944ec5ed34161e9ae2b19c10f0078c2eee09f169d20fce12f4337"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "32de6ca865fd1e39960567fe1be7352f5e2fa4f0d3f9d4e8a02c773eee4ec055"
+    },
+    {
+      "path": "README.md",
+      "sha256": "eee918bca6df6446fd5a8ee27c7ccc8ee3b19fb192d5146f726c236e38956b97"
+    },
+    {
+      "path": "RELEASE_NOTES.md",
+      "sha256": "0e33116d657162757601238038dd80fa2f3b952ce97f2756773e25cffad53b4d"
+    },
+    {
+      "path": "src/MonitorMate/App.xaml.cs",
+      "sha256": "1f207e4e46ed8f0b23963092d885cd5dbb7af8c63d0a163ee00cee42148b78b5"
+    },
+    {
+      "path": "src/MonitorMate/Core/Models/AppSettings.cs",
+      "sha256": "826ca71800e401b3b37886b06ab36936d368c674564c2aa682eb1ec83b9c46e6"
+    },
+    {
+      "path": "src/MonitorMate/Core/Models/UsageModels.cs",
+      "sha256": "a928a4d0de317b8936d5fb0c225b1b9397cdadf8ff6f3cb04c47415ad9d24643"
+    },
+    {
+      "path": "src/MonitorMate/Core/Services/ComfortService.cs",
+      "sha256": "c1a1bc5d2082d1b527d438574b409f0e11c36940734544cd70e801bbbe70b02b"
+    },
+    {
+      "path": "src/MonitorMate/Core/Services/GammaService.cs",
+      "sha256": "4318ed6f2c92ad86537ae27cbe437dc883a1ca435d2757a008596cae56b5708b"
+    },
+    {
+      "path": "src/MonitorMate/Core/Services/HotkeyService.cs",
+      "sha256": "ba6e4e41c19337934313b28fdeaa9ed9836d6862268c18e34c1ace83947ff03d"
+    },
+    {
+      "path": "src/MonitorMate/Core/Services/ReminderService.cs",
+      "sha256": "3cd9ef89c4bfa1460a52386e59d233f34bae1e7754f485c8f022c262ee64983e"
+    },
+    {
+      "path": "src/MonitorMate/Core/Services/ScheduleService.cs",
+      "sha256": "5a7afc570d5e67f52080f0b442141646cf2ae3cc2cc992fb110eba48763ac28f"
+    },
+    {
+      "path": "src/MonitorMate/Core/Services/SolarCalculator.cs",
+      "sha256": "654df31abf71cde72d71be35340996b449d01b8956fe324060c9935c7c24afc9"
+    },
+    {
+      "path": "src/MonitorMate/Core/Services/UsageStore.cs",
+      "sha256": "a8090bd303207ac7acba931ed682f7ed5cae39651dcc7dc476673eebab73959a"
+    },
+    {
+      "path": "src/MonitorMate/Core/ViewModels/DisplayCardViewModel.cs",
+      "sha256": "8c9e073abd99c73f5985a0f21c6ac4df44b65c716819eebf3ab4944903a774ac"
+    },
+    {
+      "path": "src/MonitorMate/Core/ViewModels/DisplaysViewModel.cs",
+      "sha256": "9f67b4eb9207ed59c021bf0724eedd01fb12906f7b73c09648b2b61ffb3d6c75"
+    },
+    {
+      "path": "store/Build-StorePackage.ps1",
+      "sha256": "19151acee97f68cb129eb87f0ec3d0088e38c536b0951eb50a93ddfec71faf1b"
+    },
+    {
+      "path": "store/PRIVACY.md",
+      "sha256": "daa1dadbf9974e6a17a20ef95baa54e2865ad36d6570c252c05ce7e4cfba2daa"
+    },
+    {
+      "path": "store/README.md",
+      "sha256": "eb37bf91ed346ef284e952f76030f50a5d8c156858e7e910cb4e9c84b40118de"
+    },
+    {
+      "path": "store/SUPPORT.md",
+      "sha256": "2f8118849695aeefb2d1f4a55f9c40a5579228e33ffe15ac407e5c2f30fee61b"
+    },
+    {
+      "path": "tests/MonitorMate.Regression/HardwareBoundary.cs",
+      "sha256": "72651bfc08b87fb8d60a89a11ca9a95f5d4da307c63736e158779878d4cc6639"
+    },
+    {
+      "path": "tests/MonitorMate.Regression/MonitorMate.Regression.csproj",
+      "sha256": "668fcc4be87acbd5d1db303f53e7da0fd16266a90c53e601acbfae15dc754739"
+    },
+    {
+      "path": "tests/MonitorMate.Regression/Program.cs",
+      "sha256": "f1174e09bfb4531f4f4ee67b8004d4ce12ce70e0256639cfced165db54bac4cb"
+    },
+    {
+      "path": "tests/MonitorMate.Restart/MonitorMate.Restart.csproj",
+      "sha256": "af5fc0c3c0a53fee7ac8cd6940f402046e793c1ce560320fd6486a762303e373"
+    },
+    {
+      "path": "tests/MonitorMate.Restart/Program.cs",
+      "sha256": "1fbbdae36fc52a7a2be938ad1349791554916538781c25c095b199b76d03a9a3"
+    },
+    {
+      "path": "tests/test_installer.py",
+      "sha256": "92d2289d654001e83e1c7f0a6e56527437fba829766f5358f13089845cd43e73"
+    },
+    {
+      "path": "tests/test_store_package.py",
+      "sha256": "79bca4b1ca165a7b1e174187988662cd7f628c4efd22026746758cfb684990b2"
+    }
+  ]
+}

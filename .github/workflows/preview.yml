@@ -1,0 +1,139 @@
+name: Three-platform preview
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+      - name: Verify Windows behavior and page templates
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          foreach ($project in @('Regression','AutomationConsent','Restart','UiAudit')) {
+            dotnet run --project "tests/MonitorMate.$project/MonitorMate.$project.csproj" -p:PublishSingleFile=false
+            if ($LASTEXITCODE -ne 0) { throw "Failed: $project" }
+          }
+      - name: Publish full Windows app
+        run: dotnet publish src/MonitorMate/MonitorMate.csproj -c Release -r win-x64 --self-contained true -p:UseAppHost=true -p:PublishSingleFile=false -o artifacts/windows
+      - name: Build per-user preview installer
+        shell: pwsh
+        run: |
+          choco install nsis --no-progress -y
+          if ($LASTEXITCODE -ne 0) { throw 'NSIS installation failed' }
+          & 'C:/Program Files (x86)/NSIS/makensis.exe' packaging/windows.nsi
+          if ($LASTEXITCODE -ne 0) { throw 'NSIS build failed' }
+      - name: Verify per-user install and uninstall
+        shell: pwsh
+        run: ./tools/test_windows_installer.ps1
+      - uses: actions/upload-artifact@v6
+        with:
+          name: windows-package
+          path: artifacts/MonitorMate-1.0.0-windows-x64.exe
+          if-no-files-found: error
+  portable:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-22.04
+            rid: linux-x64
+          - runner: macos-15-intel
+            rid: osx-x64
+          - runner: macos-15
+            rid: osx-arm64
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+      - name: Install Linux runtime and packaging dependencies
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libx11-6 libice6 libsm6 libfontconfig1 desktop-file-utils xvfb
+      - name: Verify reminder state and headless pointer/keyboard UI
+        run: |
+          dotnet run --project tests/MonitorMate.Reminders.Tests/MonitorMate.Reminders.Tests.csproj
+          dotnet run --project tests/MonitorMate.Desktop.Tests/MonitorMate.Desktop.Tests.csproj
+      - name: Publish native payload
+        run: dotnet publish src/MonitorMate.Desktop/MonitorMate.Desktop.csproj -c Release -r ${{ matrix.rid }} --self-contained true -p:UseAppHost=true -p:PublishSingleFile=false -o artifacts/${{ matrix.rid }}
+      - name: Smoke-test native executable
+        run: ./artifacts/${{ matrix.rid }}/MonitorMate.Desktop --smoke-test
+      - name: Initialize native reminder window
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ '${{ runner.os }}' = 'Linux' ]; then
+            xvfb-run -a ./artifacts/${{ matrix.rid }}/MonitorMate.Desktop --ui-smoke
+          else
+            ./artifacts/${{ matrix.rid }}/MonitorMate.Desktop --ui-smoke
+          fi
+      - name: Build AppImage
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/AppDir/usr/bin
+          cp -a artifacts/linux-x64/. artifacts/AppDir/usr/bin/
+          cp packaging/AppRun artifacts/AppDir/AppRun
+          cp packaging/linux.desktop artifacts/AppDir/monitormate.desktop
+          cp src/MonitorMate.Desktop/Assets/monitormate.png artifacts/AppDir/monitormate.png
+          cp LICENSE artifacts/AppDir/LICENSE.txt
+          chmod +x artifacts/AppDir/AppRun artifacts/AppDir/usr/bin/MonitorMate.Desktop
+          curl -fL https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage -o artifacts/appimagetool
+          echo '62aebc77c2149e96b593b94da9bbd1881e0984a56399ff6d7a03b7ddd7c9ce68  artifacts/appimagetool' | sha256sum -c -
+          chmod +x artifacts/appimagetool
+          ARCH=x86_64 artifacts/appimagetool --appimage-extract-and-run artifacts/AppDir artifacts/MonitorMate-1.0.0-linux-x64.AppImage
+          artifacts/MonitorMate-1.0.0-linux-x64.AppImage --appimage-extract-and-run --smoke-test
+      - name: Build Mac application bundle
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/package_macos.py "${{ matrix.rid == 'osx-arm64' && 'arm64' || 'x64' }}"
+          cd artifacts
+          if [ '${{ matrix.rid }}' = 'osx-arm64' ]; then label='Apple Silicon'; else label='Intel'; fi
+          ditto -c -k --sequesterRsrc --keepParent "MonitorMate ($label).app" '${{ matrix.rid }}.zip'
+      - uses: actions/upload-artifact@v6
+        with:
+          name: ${{ matrix.rid }}-package
+          path: |
+            artifacts/MonitorMate-1.0.0-linux-x64.AppImage
+            artifacts/osx-*.zip
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v6
+        with:
+          name: ${{ matrix.rid }}-ui-evidence
+          path: artifacts/portable-ui/*.png
+  mac-dmg:
+    needs: portable
+    runs-on: macos-15
+    steps:
+      - uses: actions/download-artifact@v7
+        with:
+          pattern: osx-*-package
+          path: bundles
+          merge-multiple: true
+      - name: Assemble one download with two native apps
+        run: |
+          set -euo pipefail
+          mkdir -p dmg artifacts
+          ditto -x -k bundles/osx-arm64.zip dmg
+          ditto -x -k bundles/osx-x64.zip dmg
+          ln -s /Applications dmg/Applications
+          hdiutil create -volname 'MonitorMate Preview' -srcfolder dmg -ov -format UDZO artifacts/MonitorMate-1.0.0-macos.dmg
+          hdiutil verify artifacts/MonitorMate-1.0.0-macos.dmg
+      - uses: actions/upload-artifact@v6
+        with:
+          name: macos-package
+          path: artifacts/MonitorMate-1.0.0-macos.dmg
+          if-no-files-found: error

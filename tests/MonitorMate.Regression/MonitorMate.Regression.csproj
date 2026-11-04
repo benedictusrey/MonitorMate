@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType><TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF><UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/MonitorMate/GlobalUsings.cs" Link="Production/GlobalUsings.cs" />
+    <Compile Include="../../src/MonitorMate/Core/Models/*.cs" LinkBase="Production/Models" />
+    <Compile Include="../../src/MonitorMate/Core/Mvvm/ObservableObject.cs" Link="Production/ObservableObject.cs" />
+    <Compile Include="../../src/MonitorMate/Core/Mvvm/RelayCommand.cs" Link="Production/RelayCommand.cs" />
+    <Compile Include="../../src/MonitorMate/Core/ViewModels/DisplaysViewModel.cs" Link="Production/DisplaysViewModel.cs" />
+    <Compile Include="../../src/MonitorMate/Core/ViewModels/PresetOptionViewModel.cs" Link="Production/PresetOptionViewModel.cs" />
+    <Compile Include="../../src/MonitorMate/Core/ViewModels/DisplayCardViewModel.cs" Link="Production/DisplayCardViewModel.cs" />
+    <Compile Include="../../src/MonitorMate/Core/ViewModels/Overlays/*.cs" LinkBase="Production/Overlays" />
+    <Compile Include="../../src/MonitorMate/Core/Services/ComfortService.cs" Link="Production/ComfortService.cs" />
+    <Compile Include="../../src/MonitorMate/Core/Services/GammaService.cs" Link="Production/GammaService.cs" />
+    <Compile Include="../../src/MonitorMate/Core/Services/SettingsService.cs" Link="Production/SettingsService.cs" />
+    <Compile Include="../../src/MonitorMate/Core/Services/UsageStore.cs" Link="Production/UsageStore.cs" />
+    <Compile Include="../../src/MonitorMate/Core/Services/LogService.cs" Link="Production/LogService.cs" />
+    <Compile Include="../../src/MonitorMate/Core/Services/AppPaths.cs" Link="Production/AppPaths.cs" />
+    <Compile Include="../../src/MonitorMate/Core/Services/SolarCalculator.cs" Link="Production/SolarCalculator.cs" />
+    <Compile Include="../../src/MonitorMate/Core/Services/ScheduleService.cs" Link="Production/ScheduleService.cs" />
+    <Compile Include="../../src/MonitorMate/Core/Services/ReminderService.cs" Link="Production/ReminderService.cs" />
+    <Compile Include="../../src/MonitorMate/Core/Services/HotkeyGesture.cs" Link="Production/HotkeyGesture.cs" />
+    <Compile Include="../../src/MonitorMate/Core/Services/HotkeyService.cs" Link="Production/HotkeyService.cs" />
+  </ItemGroup>
+</Project>

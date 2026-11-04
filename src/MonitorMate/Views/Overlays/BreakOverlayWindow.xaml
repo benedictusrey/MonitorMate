@@ -1,0 +1,84 @@
+<Window x:Class="MonitorMate.Views.Overlays.BreakOverlayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:MonitorMate.Controls"
+        Title="MonitorMate break"
+        Width="1920" Height="1080"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        ShowInTaskbar="False" ResizeMode="NoResize" Topmost="True"
+        WindowStartupLocation="Manual" ShowActivated="True"
+        KeyDown="Window_KeyDown" Closing="Window_Closing">
+    <Grid>
+        <Grid.Background>
+            <RadialGradientBrush Center="0.7,0.08" GradientOrigin="0.7,0.08" RadiusX="0.9" RadiusY="0.9">
+                <GradientStop Color="#1C241C" Offset="0" />
+                <GradientStop Color="#10130F" Offset="0.55" />
+                <GradientStop Color="#0C100D" Offset="1" />
+            </RadialGradientBrush>
+        </Grid.Background>
+
+        <Grid Margin="42,34,42,30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image Source="/Assets/monitormate.ico" Width="24" Height="24" />
+                    <TextBlock Text="MonitorMate" Margin="10,0,0,0" FontSize="13" FontWeight="SemiBold"
+                               Foreground="#F4EFE4" VerticalAlignment="Center" />
+                </StackPanel>
+                <TextBlock x:Name="ModeLabel" HorizontalAlignment="Right" VerticalAlignment="Center"
+                           FontSize="12" Foreground="#B7BFB2">
+                    A short pause
+                </TextBlock>
+            </Grid>
+
+            <Grid Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel HorizontalAlignment="Center" MaxWidth="760">
+                    <Grid Width="224" Height="224" HorizontalAlignment="Center">
+                        <controls:RingProgress Progress="{Binding Progress}" Thickness="4"
+                                               TrackBrush="#22FFFFFF" ProgressBrush="#E07A5F" />
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding CountdownText}" FontFamily="{StaticResource DisplayFont}"
+                                       FontSize="52" FontWeight="Light" HorizontalAlignment="Center"
+                                       Foreground="#F4EFE4" />
+                            <TextBlock Text="remaining" FontSize="12" Foreground="#B7BFB2"
+                                       HorizontalAlignment="Center" Margin="0,-2,0,0" />
+                        </StackPanel>
+                    </Grid>
+
+                    <TextBlock Text="{Binding Prompt}" FontFamily="{StaticResource DisplayFont}"
+                               FontSize="30" FontWeight="Light" TextAlignment="Center"
+                               Foreground="#F4EFE4" Margin="0,30,0,0" TextWrapping="Wrap" />
+                    <TextBlock Text="{Binding SubPrompt}" FontSize="14" TextAlignment="Center"
+                               Foreground="#B7BFB2" TextWrapping="Wrap" Margin="0,10,0,0" />
+                    <TextBlock Text="{Binding SessionSummary}" FontSize="12" TextAlignment="Center"
+                               Foreground="#889384" Margin="0,18,0,0" />
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <StackPanel x:Name="ActionPanel" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Button x:Name="SkipButton" Style="{StaticResource SecondaryButton}" MinWidth="144"
+                            Padding="22,11" Click="SkipButton_Click"
+                            PreviewMouseLeftButtonDown="SkipButton_PreviewMouseLeftButtonDown"
+                            PreviewMouseLeftButtonUp="SkipButton_PreviewMouseLeftButtonUp"
+                            MouseLeave="SkipButton_PreviewMouseLeave">
+                        Skip break
+                    </Button>
+                </StackPanel>
+                <TextBlock x:Name="StrictHint" HorizontalAlignment="Center" Visibility="Collapsed"
+                           FontSize="13" Foreground="#B7BFB2">
+                    This break is protected. It will end when the timer reaches zero.
+                </TextBlock>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="11.5"
+                           Foreground="#889384" Text="A quiet moment for your eyes." />
+                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="11.5"
+                           Foreground="#889384" Text="Your screen returns when the timer ends." />
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

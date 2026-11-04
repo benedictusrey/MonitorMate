@@ -1,0 +1,41 @@
+{
+  "status": "native-runner preview builds; Windows full app, Linux/macOS reminders only",
+  "desktop_project": "src/MonitorMate.Desktop/MonitorMate.Desktop.csproj",
+  "current_windows_project": "src/MonitorMate/MonitorMate.csproj",
+  "framework_recommendation": "WPF on Windows; Avalonia reminder preview on Linux/macOS",
+  "runtimes": [
+    "win-x64",
+    "linux-x64",
+    "osx-x64",
+    "osx-arm64"
+  ],
+  "packages": [
+    {
+      "os": "windows",
+      "format": "exe",
+      "runtimes": [
+        "win-x64"
+      ],
+      "universal_binary": false,
+      "scope": "Windows WPF"
+    },
+    {
+      "os": "linux",
+      "format": "AppImage",
+      "runtimes": [
+        "linux-x64"
+      ],
+      "universal_binary": false
+    },
+    {
+      "os": "macos",
+      "format": "dmg",
+      "runtimes": [
+        "osx-x64",
+        "osx-arm64"
+      ],
+      "universal_binary": false,
+      "layout": "Two labelled native app bundles in one DMG; not Universal 2"
+    }
+  ]
+}

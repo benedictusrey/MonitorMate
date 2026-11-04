@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-04",
+  "markdown_files_checked": 41,
+  "local_link_errors": 0,
+  "readme_product_visuals": 4,
+  "static_badges": 5,
+  "documentation_checker_self_test": "passed",
+  "platform_planner_tests": 3,
+  "platform_planner_tests_passed": 3,
+  "current_portability_status": "blocked: portable host missing",
+  "installer_artifacts_created": 0,
+  "source_files_unchanged": 92,
+  "github_settings": "prepared locally at owner's request; not applied",
+  "github_access_read": "authenticated REST read returned 404",
+  "trial_added": false,
+  "license_adopted": false,
+  "application_build_rerun": false
+}

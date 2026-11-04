@@ -1,0 +1,35 @@
+name: Bug report
+description: Report a reproducible MonitorMate problem without private data.
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: "Read the audit first. Do not post private settings, coordinates or raw logs. Security disclosures need a private channel."
+  - type: input
+    id: version
+    attributes:
+      label: Version or source revision
+    validations:
+      required: true
+  - type: input
+    id: system
+    attributes:
+      label: Windows build and display scale
+    validations:
+      required: true
+  - type: textarea
+    id: hardware
+    attributes:
+      label: Monitor, connection and driver
+      description: Include DDC/CI status and whether multiple displays are connected.
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps, expected behavior and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: recovery
+    attributes:
+      label: Recovery and sanitized evidence
+      description: Could you pause or exit normally? Include only reviewed nonprivate details.

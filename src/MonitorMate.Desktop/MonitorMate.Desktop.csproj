@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+<PropertyGroup><OutputType>WinExe</OutputType><TargetFramework>net10.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><Version>1.0.0</Version><Authors>Benedictus RH</Authors><ApplicationManifest>app.manifest</ApplicationManifest></PropertyGroup>
+<ItemGroup><ProjectReference Include="../MonitorMate.Reminders/MonitorMate.Reminders.csproj" /><PackageReference Include="Avalonia.Desktop" Version="12.1.4" /><PackageReference Include="Avalonia.Themes.Fluent" Version="12.1.4" /><PackageReference Include="Avalonia.Fonts.Inter" Version="12.1.4" /></ItemGroup>
+<ItemGroup><AvaloniaResource Include="Assets/**" /></ItemGroup>
+  <ItemGroup>
+    <Content Include="../../licenses/**" Link="licenses/%(RecursiveDir)%(Filename)%(Extension)" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="../../LICENSE" Link="MonitorMate-LICENSE.txt" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="../../THIRD_PARTY_NOTICES.md" Link="MonitorMate-THIRD-PARTY-NOTICES.md" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

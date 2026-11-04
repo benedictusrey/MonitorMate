@@ -1,0 +1,12 @@
+{
+  "audit_date": "2026-11-04",
+  "original_markdown_files": 22,
+  "final_markdown_files": 26,
+  "local_links_checked": 133,
+  "source_files_hashed": 92,
+  "source_tree_modified": false,
+  "generated_images": 3,
+  "debug_rebuild": "0 warnings, 0 errors",
+  "release_rebuild": "0 warnings, 0 errors",
+  "failures": []
+}

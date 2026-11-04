@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=MonitorMate
+Comment=Timed break reminders (preview; no display control)
+Exec=MonitorMate.Desktop
+Icon=monitormate
+Categories=Utility;
+Terminal=false

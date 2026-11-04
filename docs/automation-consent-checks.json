@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-04",
+  "scope": "Manual versus automatic Windows display control",
+  "results": {
+    "consent_checks": 9,
+    "domain_regressions": 18,
+    "restart_integration": 1,
+    "packaging_tests": 2,
+    "platform_planner_tests": 3,
+    "markdown_files": 42,
+    "readme_images": 4,
+    "debug_build": "0 warnings, 0 errors",
+    "release_build": "0 warnings, 0 errors"
+  },
+  "limitations": [
+    "Native dialogs and physical monitor behavior were not exercised.",
+    "The Codex computer-use workspace-policy error is separate and is not repaired by this change.",
+    "No OS elevation is requested; the Windows app remains asInvoker.",
+    "Linux and macOS implementations and installers remain unavailable."
+  ],
+  "migration": "Settings without AutomaticDisplayControlAllowed load with scheduling and launch restore off. Manual preferences remain available."
+}
