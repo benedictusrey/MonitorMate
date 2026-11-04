@@ -32,6 +32,23 @@ internal static class Program
             fixture.Comfort.ApplyPresetAsync("night").GetAwaiter().GetResult();
             Require(NativeMethods.Writes == 0, "Preset wrote gamma before setup consent.");
         });
+        Run("Read-only display scan and close do not write gamma", () =>
+        {
+            var fixture=Create(false,true);
+            fixture.Gamma.Apply(fixture.Info,70,3600,20);
+            fixture.Gamma.Dispose();
+            NativeMethods.Writes=0;
+            using var readOnlySession=new GammaService(fixture.Log);
+            readOnlySession.Dispose();
+            Require(NativeMethods.Writes==0,"Closing a read-only session rewrote a saved baseline.");
+        });
+        Run("Changed gamma still restores once on exit", () =>
+        {
+            var fixture=Create(true,true); var original=NativeMethods.Ramp.ToArray();
+            fixture.Gamma.Apply(fixture.Info,70,3600,20); NativeMethods.Writes=0;
+            fixture.Gamma.Dispose();
+            Require(NativeMethods.Writes==1 && NativeMethods.Ramp.SequenceEqual(original),"Owned gamma change was not restored once.");
+        });
         Run("Disabled display receives no apply writes", () =>
         {
             var fixture = Create(true, false);

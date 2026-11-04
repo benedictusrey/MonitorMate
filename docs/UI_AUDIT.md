@@ -41,6 +41,9 @@ not establish screen-reader or user text-scaling acceptance.
   explicitly apply the existing shared Window style so ordinary text also inherits
   the intended foreground and font. The harness now constructs the real main
   window and verifies its foreground.
+- Read-only sessions could rewrite previously saved gamma baselines on exit.
+  Cleanup now skips records without a pending applied adjustment; explicit reset/compare
+  actions remain available. Tests check both untouched and actively changed ramps.
 - Several Windows labels were smaller than 11 DIPs. The page/template checks now
   enforce a consistent floor; chart labels were brought into line.
 - Focus-choice descriptions clipped at the default content width. They now wrap.

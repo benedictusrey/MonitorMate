@@ -8,7 +8,8 @@ Created by **Benedictus RH (@benedictusrey)**. MIT licensed; no timed trial or e
 v1.0.1 fixes Windows button text contrast. A global text style had overridden
 button foregrounds, leaving pale labels on coral actions. Labels now inherit their
 control's intended color. New page-template checks cover the effective label color.
-The original v1.0.0 release and tag remain intact.
+Cleanup also skips saved gamma baselines that have no pending MonitorMate
+adjustment. The original v1.0.0 release and tag remain intact.
 
 ## Windows
 

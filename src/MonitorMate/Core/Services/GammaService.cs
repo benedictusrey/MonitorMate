@@ -170,7 +170,7 @@ public sealed class GammaService : IDisposable
         {
             foreach (var record in _records.Values.ToList())
             {
-                if (!IsValidRamp(record.Ramp) || string.IsNullOrWhiteSpace(record.DeviceName))
+                if (!IsValidRamp(record.Ramp) || string.IsNullOrWhiteSpace(record.DeviceName) || string.IsNullOrWhiteSpace(record.AppliedSignature))
                 {
                     continue;
                 }
