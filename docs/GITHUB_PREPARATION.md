@@ -1,7 +1,7 @@
 # GitHub repository and preview settings
 
 Target repository: [benedictusrey/MonitorMate](https://github.com/benedictusrey/MonitorMate).
-The owner authorized public source publication and a v1.0.0 GitHub pre-release.
+The owner authorized public source publication and a v1.0.1 GitHub pre-release.
 The license is MIT and the author credit is **Benedictus RH (@benedictusrey)**.
 
 Repository About description, homepage and topics are recorded in

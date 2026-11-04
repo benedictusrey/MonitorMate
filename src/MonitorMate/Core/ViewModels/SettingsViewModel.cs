@@ -102,7 +102,7 @@ public sealed class SettingsViewModel : ObservableObject
     public ICommand ToggleDiagnosticsCommand { get; }
     public IReadOnlyList<HotkeyRowViewModel> HotkeyRows { get; private set; } = Array.Empty<HotkeyRowViewModel>();
     public IReadOnlyList<DiagnosticRow> DiagnosticRows { get; private set; } = Array.Empty<DiagnosticRow>();
-    public string VersionText => $"Version {Assembly.GetExecutingAssembly().GetName().Version?.ToString(3) ?? "1.0.0"}";
+    public string VersionText => $"Version {Assembly.GetExecutingAssembly().GetName().Version?.ToString(3) ?? "1.0.1"}";
     public string DataPath => AppPaths.DataDirectory;
     public string StartupError { get => _startupError; private set => SetProperty(ref _startupError, value); }
     public string HotkeyConflicts { get => _hotkeyConflicts; private set => SetProperty(ref _hotkeyConflicts, value); }

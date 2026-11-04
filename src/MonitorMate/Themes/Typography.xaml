@@ -5,7 +5,6 @@
 
     <Style TargetType="TextBlock">
         <Setter Property="FontFamily" Value="{StaticResource UiFont}" />
-        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
         <Setter Property="FontSize" Value="12.5" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
     </Style>

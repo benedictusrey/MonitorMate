@@ -2,6 +2,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
@@ -39,6 +40,7 @@ internal static class Program
         {
             view.DataContext = model;
             var surface=new Border { Background=(Brush)app.FindResource("WindowBackgroundBrush"), Child=view, Width=800 };
+            TextElement.SetForeground(surface,(Brush)app.FindResource("TextPrimaryBrush"));
             surface.Measure(new Size(800,double.PositiveInfinity));
             var height = Math.Ceiling(surface.DesiredSize.Height);
             surface.Arrange(new Rect(0,0,800,height)); surface.UpdateLayout();
@@ -57,6 +59,9 @@ internal static class Program
         {
             var button = new Button { Content="Test", Style=(Style)app.FindResource(style), IsEnabled=false };
             button.Measure(new Size(200,50)); button.Arrange(new Rect(0,0,200,50)); button.ApplyTemplate();
+            foreach(var label in Descendants(button).OfType<TextBlock>())
+                if(label.Foreground is SolidColorBrush text && button.Foreground is SolidColorBrush intended && text.Color!=intended.Color)
+                { failures++; Console.WriteLine($"FAIL {style}: label overrides its intended foreground."); }
             var chrome=(Border)button.Template.FindName("Chrome",button);
             if(chrome.Opacity >= 1) { failures++; Console.WriteLine($"FAIL {style}: disabled button has no visual feedback."); }
         }

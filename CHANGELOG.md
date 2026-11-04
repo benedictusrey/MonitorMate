@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1 preview — 4 November 2026
+
+- Fix Windows button labels overriding their intended text colors.
+- Add an effective label-color regression to the page-template harness.
+- Preserve the original v1.0.0 release and tag.
+
 ## 1.0.0 preview — 4 November 2026
 
 - Add a Linux/macOS reminder preview with explicit capability limits.

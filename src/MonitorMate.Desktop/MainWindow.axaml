@@ -44,7 +44,7 @@
     <Button Content="Display control unavailable" IsEnabled="False" AutomationProperties.HelpText="This preview has no native display-control backend."/>
    </StackPanel></Border>
    <TextBlock Text="Windows users can use the separate full Windows app. Linux and macOS preview features are intentionally smaller." Classes="secondary"/>
-   <TextBlock Text="MonitorMate 1.0.0 preview · MIT License · Benedictus RH (@benedictusrey)" FontSize="12" Classes="secondary"/>
+   <TextBlock Text="MonitorMate 1.0.1 preview · MIT License · Benedictus RH (@benedictusrey)" FontSize="12" Classes="secondary"/>
   </StackPanel></ScrollViewer></TabItem>
  </TabControl>
  <TextBlock Grid.Row="2" x:Name="StatusText" Text="Ready. Reminders start only when you choose Start reminders." Classes="secondary" FontSize="12" Margin="0,16,0,0" AutomationProperties.LiveSetting="Polite"/>

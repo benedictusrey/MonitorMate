@@ -1,4 +1,4 @@
-# v1.0.0 preview readiness
+# v1.0.1 preview readiness
 
 The owner approved a smaller Linux/macOS reminder preview alongside the full
 Windows app. Native display-feature parity is not a release claim. The source is

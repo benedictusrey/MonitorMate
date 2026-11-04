@@ -35,6 +35,9 @@ not establish screen-reader or user text-scaling acceptance.
 
 ## Reproduced findings and repairs
 
+- A final effective-color check found the global text style overriding button
+  foregrounds. v1.0.1 removes that override so filled actions use dark, readable
+  labels; template checks cover the actual rendered text color.
 - Several Windows labels were smaller than 11 DIPs. The page/template checks now
   enforce a consistent floor; chart labels were brought into line.
 - Focus-choice descriptions clipped at the default content width. They now wrap.

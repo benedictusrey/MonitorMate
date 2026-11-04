@@ -30,8 +30,8 @@
   "wiki": false,
   "license": "MIT",
   "release": {
-    "tag": "v1.0.0",
-    "title": "MonitorMate v1.0.0 - GitHub preview",
+    "tag": "v1.0.1",
+    "title": "MonitorMate v1.0.1 - GitHub preview",
     "draft": true,
     "prerelease": true,
     "make_latest": false,
