@@ -1,4 +1,4 @@
-# Interface and behavior audit — 4 November 2026
+# Interface and behavior audit — 4–5 November 2026
 
 This audit covers the seven Windows pages and the new three-tab reminder preview.
 It separates framework rendering/input checks from native desktop and hardware
@@ -95,6 +95,11 @@ it does not add Developer ID signing or notarization.
 [Portable reminder capture](screenshots/reminder-preview.png) is a framework-rendered
 interface capture from the test app. Existing promotional illustrations and earlier
 native captures remain clearly labelled in the README.
+
+Mac 15 hosted jobs later failed to acquire runners after repeated attempts,
+with GitHub reporting capacity constraints. The matrix uses GitHub's supported
+Mac 26 Intel and Apple Silicon labels for the final build. The tests, native
+window smoke checks, signing and package verification remain required.
 
 ## Remaining acceptance work
 

@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.1 preview — 4 November 2026
+## 1.0.1 preview — 5 November 2026
 
 - Fix Windows button labels overriding their intended text colors.
 - Leave untouched saved gamma baselines alone during display cleanup.
