@@ -30,6 +30,7 @@ internal static class Program
         Check("Pointer starts, pauses, resumes and stops reminders",()=> {
             Require(main.Engine.Phase==ReminderPhase.Stopped,"Reminders started without consent.");
             Click("StartButton"); Require(main.Engine.Phase==ReminderPhase.Working,"Start click failed.");
+            Require(main.FindControl<TextBlock>("StatusText")!.Text!.Contains("running"),"Start incorrectly asks the user to restart.");
             Click("PauseButton"); Require(main.Engine.IsPaused,"Pause click failed.");
             Click("PauseButton"); Require(!main.Engine.IsPaused,"Resume click failed.");
             Click("StopButton"); Require(main.Engine.Phase==ReminderPhase.Stopped,"Stop click failed.");

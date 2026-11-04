@@ -48,7 +48,8 @@ public partial class MainWindow : Window
             var rhythm = ReadRhythm(); _engine.Start(rhythm.Work,rhythm.BreakSeconds); CloseBreak();
             _previousTick = Stopwatch.GetTimestamp(); _timer.Start();
             StatusText.Text = "Reminders are running. You can pause or stop at any time.";
-            SaveRhythm(); Refresh();
+            if (SaveRhythm()) StatusText.Text = "Reminders are running. You can pause or stop at any time.";
+            Refresh();
         }
         catch (ArgumentException) { StatusText.Text = "Enter whole work minutes from 1 to 240 and break seconds from 5 to 600."; }
     }
@@ -74,7 +75,7 @@ public partial class MainWindow : Window
         catch (ArgumentException) { StatusText.Text="Choose a valid break length in Rhythm first."; }
     }
     private void Save_Click(object? sender, RoutedEventArgs e) => SaveRhythm();
-    private void SaveRhythm()
+    private bool SaveRhythm()
     {
         try
         {
@@ -82,10 +83,12 @@ public partial class MainWindow : Window
             var settings = new PreviewSettings(rhythm.Work,rhythm.BreakSeconds,_initialTotal+_engine.CompletedBreaks);
             _store.Save(settings); _savedSettings = settings;
             StatusText.Text = _engine.Phase==ReminderPhase.Stopped ? "Rhythm saved." : "Rhythm saved. Restart reminders to apply any changes.";
+            return true;
         }
         catch (ArgumentException) { StatusText.Text="Enter whole work minutes from 1 to 240 and break seconds from 5 to 600."; }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         { StatusText.Text="Could not save settings. Reminders still work for this session."; }
+        return false;
     }
     private void ShortRhythm_Click(object? sender, RoutedEventArgs e) { WorkMinutesInput.Value=20; BreakSecondsInput.Value=20; }
     private void Pomodoro_Click(object? sender, RoutedEventArgs e) { WorkMinutesInput.Value=25; BreakSecondsInput.Value=300; }

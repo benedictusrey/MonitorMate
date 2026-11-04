@@ -53,6 +53,8 @@ not establish screen-reader or user text-scaling acceptance.
   The engine now exposes its active duration.
 - A manual break before Start returned to the default work interval. It now uses
   the chosen rhythm.
+- Start confirmation was overwritten by a saved-settings message asking for another
+  restart. Successful starts now confirm that reminders are running.
 - Empty unsaved rhythm fields prevented completed totals from being saved.
   Completion persistence now uses the last saved rhythm independently of edits.
 

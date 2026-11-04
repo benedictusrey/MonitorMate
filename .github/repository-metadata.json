@@ -1,8 +1,8 @@
 {
-  "status": "local proposal; not applied to GitHub",
+  "status": "Public source repository created; preview package workflow runs before release publication.",
   "repository": "benedictusrey/MonitorMate",
-  "repository_visibility": "public, proposed",
-  "remote_state": "Authenticated GitHub REST read returned 404 on 2026-11-04. Repository existence/access remains unverified.",
+  "repository_visibility": "public",
+  "remote_state": "Public benedictusrey/MonitorMate created and source pushed on 2026-11-04.",
   "description": "Monitor comfort, break reminders and focus for Windows, with a smaller reminder preview for Linux and macOS. Local data, MIT licensed.",
   "homepage": "https://github.com/benedictusrey/MonitorMate#readme",
   "social_preview_image": "docs/images/monitormate-overview.png (proposed; check crop in GitHub before saving)",
@@ -48,6 +48,6 @@
     "store_entitlement_implemented": false,
     "listing_published": false
   },
-  "homepage_status": "Proposed repository landing page; not a deployed website. Apply only after repository access is verified.",
-  "settings_application": "Local preparation only, as requested by the owner. No remote settings changed."
+  "homepage_status": "Repository README landing page; no separate site or Store listing.",
+  "settings_application": "Description, homepage, Issues, wiki/discussion defaults and topics applied and verified on GitHub."
 }
