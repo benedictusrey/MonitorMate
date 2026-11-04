@@ -4,24 +4,24 @@ title: "[Bug] "
 body:
   - type: markdown
     attributes:
-      value: "Read the audit first. Do not post private settings, coordinates or raw logs. Security disclosures need a private channel."
+      value: "Read Support and the current feature audit first. Do not post private settings, coordinates or raw logs. Use the repository Security tab to report vulnerabilities privately."
   - type: input
     id: version
     attributes:
-      label: Version or source revision
+      label: Version, package SHA-256 or source revision
     validations:
       required: true
   - type: input
     id: system
     attributes:
-      label: Windows build and display scale
+      label: Operating system, version, architecture and display scale
     validations:
       required: true
   - type: textarea
     id: hardware
     attributes:
       label: Monitor, connection and driver
-      description: Include DDC/CI status and whether multiple displays are connected.
+      description: For Windows controls, include DDC/CI, HDR, multiple displays and the exact control-status message. Linux/macOS previews implement reminders only.
   - type: textarea
     id: reproduction
     attributes:

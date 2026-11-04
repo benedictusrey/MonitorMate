@@ -38,6 +38,31 @@ public sealed class ComfortService : ObservableObject, IDisposable
     public event EventHandler<DisplayState>? StateUpdated;
     public event EventHandler? StateChanged;
 
+    public string GetApplySummary(string action, DisplayState? selected = null)
+    {
+        if (!_settings.Settings.SetupCompleted) return "Finish setup before applying display changes.";
+        if (_previewOriginal) return "Compare with original is active. Settings saved; no new display change applied.";
+        if (IsPaused) return "Display control is paused. No new display change applied.";
+        var enabled = _states.Where(state => state.Preference.Enabled && (selected is null || ReferenceEquals(state, selected))).ToList();
+        if (enabled.Count == 0) return "No enabled displays. Connect and enable a display, then try again.";
+        var parts = new List<string>();
+        foreach (var outcome in Enum.GetValues<DisplayApplyOutcome>())
+        {
+            var count = enabled.Count(state => state.ApplyOutcome == outcome);
+            if (count == 0) continue;
+            var label = outcome switch
+            {
+                DisplayApplyOutcome.Confirmed => "confirmed",
+                DisplayApplyOutcome.Limited => "limited by Windows gamma range",
+                DisplayApplyOutcome.Unconfirmed => "unconfirmed",
+                DisplayApplyOutcome.Partial => "partly applied",
+                _ => "not applied"
+            };
+            parts.Add($"{count} {label}");
+        }
+        return $"{action}: {string.Join(", ", parts)}. Check each display's control status.";
+    }
+
     public async Task InitializeAsync()
     {
         await RebuildStatesAsync(applyAfter: false);
@@ -254,6 +279,7 @@ public sealed class ComfortService : ObservableObject, IDisposable
 
     private async Task ApplyStateCoreAsync(DisplayState state)
     {
+        state.ApplyOutcome = DisplayApplyOutcome.NotApplied;
         if (!_settings.Settings.SetupCompleted)
         {
             state.Status = "Finish setup before applying display changes";
@@ -310,39 +336,61 @@ public sealed class ComfortService : ObservableObject, IDisposable
                         : hardwareMessage;
                 }
             }
+            else
+            {
+                hardwareError = true;
+                hardwareMessage = result.Error ?? "Hardware contrast failed.";
+            }
         }
 
-        state.AppliedTemperatureK = preference.TemperatureK;
-        state.AppliedSoftwareDim = preference.SoftwareDim;
+        if (gammaResult.Success && !gammaResult.Unconfirmed && !gammaResult.Limited)
+        {
+            state.AppliedTemperatureK = preference.TemperatureK;
+            state.AppliedSoftwareDim = preference.SoftwareDim;
+            if (!state.Info.HardwareBrightnessSupported) state.AppliedBrightness = preference.Brightness;
+        }
 
         if (!state.Info.GammaSupported && !state.Info.HardwareBrightnessSupported)
         {
             state.Status = "This display has no usable control path";
+            state.ApplyOutcome = DisplayApplyOutcome.Failed;
             state.LastError = state.Info.GammaWarning ?? "Windows exposes neither DDC/CI nor a gamma ramp.";
             state.IsUnconfirmed = false;
         }
         else if (!gammaResult.Success && !state.Info.HardwareBrightnessSupported)
         {
-            state.Status = gammaResult.Message ?? "Colour adjustment failed";
+            state.Status = "Colour control unavailable";
+            state.ApplyOutcome = DisplayApplyOutcome.Failed;
             state.LastError = gammaResult.Message;
             state.IsUnconfirmed = false;
         }
         else if (!gammaResult.Success && state.Info.HardwareBrightnessSupported)
         {
-            state.Status = "Brightness works / colour control unavailable";
+            var brightnessConfirmed = !hardwareError && hardwareMessage.Length == 0;
+            state.Status = brightnessConfirmed ? "Brightness confirmed / colour unavailable" : "Display changes not confirmed";
+            state.ApplyOutcome = brightnessConfirmed ? DisplayApplyOutcome.Partial : DisplayApplyOutcome.Failed;
             state.LastError = gammaResult.Message;
             state.IsUnconfirmed = false;
         }
         else if (gammaResult.Unconfirmed || !string.IsNullOrWhiteSpace(hardwareMessage) || hardwareError)
         {
+            state.ApplyOutcome = DisplayApplyOutcome.Unconfirmed;
             state.Status = hardwareError
                 ? "Adjustment not confirmed"
                 : "Request sent / driver did not confirm";
             state.LastError = hardwareMessage.Length > 0 ? hardwareMessage : gammaResult.Message;
             state.IsUnconfirmed = true;
         }
+        else if (gammaResult.Limited)
+        {
+            state.ApplyOutcome = DisplayApplyOutcome.Limited;
+            state.Status = "Applied / Windows gamma range limited";
+            state.LastError = gammaResult.Message;
+            state.IsUnconfirmed = true;
+        }
         else
         {
+            state.ApplyOutcome = DisplayApplyOutcome.Confirmed;
             state.Status = state.Info.ControlPath switch
             {
                 DisplayControlPath.HardwareDdc => "Applied / hardware + colour",

@@ -23,6 +23,7 @@ The source uses [MIT](../LICENSE), credited to Benedictus RH (@benedictusrey).
 | [docs/CROSS_PLATFORM.md](CROSS_PLATFORM.md) |
 | [docs/DESIGN.md](DESIGN.md) |
 | [docs/DOCUMENTATION_INDEX.md](DOCUMENTATION_INDEX.md) |
+| [docs/FEATURE_AUDIT.md](FEATURE_AUDIT.md) |
 | [docs/GITHUB_PREPARATION.md](GITHUB_PREPARATION.md) |
 | [docs/IMAGE_ASSETS.md](IMAGE_ASSETS.md) |
 | [docs/INSTALLATION.md](INSTALLATION.md) |

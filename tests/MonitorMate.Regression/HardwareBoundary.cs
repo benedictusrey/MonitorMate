@@ -9,11 +9,20 @@ namespace MonitorMate.Core.Interop
         public const int WM_HOTKEY = 0x0312;
         public static ushort[] Ramp = Enumerable.Range(0, 768).Select(i => (ushort)((i % 256) * 257)).ToArray();
         public static int Writes;
+        public static bool RejectGammaWrites;
+        public static bool IgnoreGammaWrites;
+        public static bool QuantizeGamma;
         public static HashSet<int> Keys = new();
         public static IntPtr CreateDC(string driver, string device, string? output, IntPtr init) => new(1);
         public static bool DeleteDC(IntPtr dc) => true;
         public static bool GetDeviceGammaRamp(IntPtr dc, ushort[] ramp) { Ramp.CopyTo(ramp, 0); return true; }
-        public static bool SetDeviceGammaRamp(IntPtr dc, ushort[] ramp) { Writes++; Ramp = ramp.ToArray(); return true; }
+        public static bool SetDeviceGammaRamp(IntPtr dc, ushort[] ramp)
+        {
+            Writes++;
+            if (RejectGammaWrites || ramp.Where((value, index) => Math.Abs(value - (index % 256) * 257) > 32767).Any()) return false;
+            if (!IgnoreGammaWrites) Ramp = ramp.Select(value => QuantizeGamma ? (ushort)(Math.Round(value / 257.0) * 257) : value).ToArray();
+            return true;
+        }
         public static bool RegisterHotKey(IntPtr hwnd, int id, uint modifiers, uint key) => Keys.Add(id);
         public static bool UnregisterHotKey(IntPtr hwnd, int id) => Keys.Remove(id);
         public static bool LockWorkStation() => true;

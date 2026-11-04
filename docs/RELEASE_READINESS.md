@@ -4,6 +4,10 @@ The owner approved a smaller Linux/macOS reminder preview alongside the full
 Windows app. Native display-feature parity is not a release claim. The source is
 MIT licensed, credited to **Benedictus RH (@benedictusrey)**, with no timed trial.
 
+The [published preview](https://github.com/benedictusrey/MonitorMate/releases/tag/v1.0.0)
+records current package provenance and hashes. The [feature audit](FEATURE_AUDIT.md)
+explains the gamma compatibility repair and remaining physical acceptance.
+
 ## Verification
 
 Windows domain regressions, consent, restart handoff and the seven-page render

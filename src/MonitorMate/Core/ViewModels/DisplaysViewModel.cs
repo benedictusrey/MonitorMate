@@ -169,7 +169,7 @@ public sealed class DisplaysViewModel : ObservableObject
         {
             await _services.Comfort.ApplyPresetAsync(presetId);
             RefreshValues();
-            Message = $"{PresetCatalog.Get(presetId).Name} applied to all displays.";
+            Message = _services.Comfort.GetApplySummary(PresetCatalog.Get(presetId).Name);
         }
         finally
         {
@@ -193,7 +193,7 @@ public sealed class DisplaysViewModel : ObservableObject
             await _services.Comfort.ApplyAllAsync();
             _services.Settings.SaveDebounced();
             RefreshValues();
-            Message = "These settings now match on every display.";
+            Message = _services.Comfort.GetApplySummary("Match settings");
         }
         finally
         {
@@ -231,10 +231,18 @@ public sealed class DisplaysViewModel : ObservableObject
         SelectedDisplay.ResetToOriginal();
         _services.Comfort.NoteManualAdjustment(SelectedDisplay.State);
         await _services.Comfort.ApplyStateAsync(SelectedDisplay.State);
-        await _services.Displays.RestoreOriginalBrightnessAsync(SelectedDisplay.Info);
+        if (SelectedDisplay.Info.HardwareBrightnessSupported)
+        {
+            var restored = await _services.Displays.RestoreOriginalBrightnessAsync(SelectedDisplay.Info);
+            if (!restored.Confirmed)
+            {
+                Message = "Original hardware brightness was not confirmed. Use the monitor controls and check its connection.";
+                return;
+            }
+        }
         _services.Settings.SaveDebounced();
         RefreshValues();
-        Message = "Original colour and hardware brightness restored for this display.";
+        Message = _services.Comfort.GetApplySummary("Reset", SelectedDisplay.State);
     }
 
     public void AdjustBrightness(int delta)

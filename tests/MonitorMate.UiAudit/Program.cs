@@ -58,6 +58,26 @@ internal static class Program
             if (small > 0) { failures++; Console.WriteLine($"FAIL {name}: {small} labels below 11 DIPs."); }
 
         }
+        var rejected = new MonitorMate.Core.Models.DisplayState
+        {
+            Info = new MonitorMate.Core.Models.DisplayInfo
+            {
+                Id="ui-only", DeviceName="ui-only", Name="Display 1", AdapterName="Simulated",
+                Bounds=new(), WorkArea=new(), GammaSupported=true
+            },
+            Status="Colour control unavailable",
+            LastError="Windows or the display driver rejected colour control. Use Windows Night light or monitor controls; administrator access is not required."
+        };
+        ((List<MonitorMate.Core.Models.DisplayState>)services.Comfort.States).Add(rejected);
+        main.DisplaysPage.RebuildCards();
+        var rejectedView = new DisplaysView { DataContext=main.DisplaysPage };
+        rejectedView.Measure(new Size(800,double.PositiveInfinity));
+        rejectedView.Arrange(new Rect(0,0,800,Math.Ceiling(rejectedView.DesiredSize.Height))); rejectedView.UpdateLayout();
+        app.Dispatcher.Invoke(() => { },DispatcherPriority.ContextIdle);
+        var status = Descendants(rejectedView).OfType<TextBlock>().FirstOrDefault(text => text.Text == rejected.Status);
+        if(status is null || status.TextWrapping != TextWrapping.Wrap)
+        { failures++; Console.WriteLine("FAIL Rejected display status is missing or cannot wrap."); }
+        Console.WriteLine("RENDER displays with rejected driver: " + rejectedView.ActualHeight);
         foreach (var style in new[] { "FlatButton", "PrimaryButton", "SecondaryButton", "DangerButton", "IconButton" })
         {
             var button = new Button { Content="Test", Style=(Style)app.FindResource(style), IsEnabled=false };

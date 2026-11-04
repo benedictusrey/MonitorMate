@@ -1,76 +1,76 @@
-# MonitorMate support
+# Troubleshooting and removal
 
-Current candidate: [release readiness](../docs/RELEASE_READINESS.md).
-MonitorMate now uses MIT. Older defect descriptions below refer to the audited
-local build; the repaired candidate still requires native acceptance testing.
+This guide covers the v1.0.0 GitHub preview. Use [Support](../SUPPORT.md) to report
+problems and [Security](../SECURITY.md) for private vulnerability reports.
 
-Reviewed 4 November 2026. Local build: 1.0.0. Proposed issue tracker:
-[MonitorMate issues](https://github.com/benedictusrey/MonitorMate/issues).
-Availability has not been verified. Use a confirmed contact before publishing a listing.
+## Windows rejects warmth or dimming
 
-## Report a problem
+A readable gamma ramp means the driver returned its current table. It does not
+establish write support. Manual and automatic modes use the same driver path;
+switching modes cannot grant missing capabilities.
 
-Include version, Windows build, monitor model, cable/dock, driver, steps,
-expected behavior and actual behavior. Review diagnostics before sharing: they
-can include display identifiers, paths and exception details. Do not share private
-screenshots, credentials or an entire app-data folder.
+The app bounds generated ramps to Windows' supported range. Strong dimming and
+warmth may be reduced; the control status explains this. A limited result differs
+from rejection or an unconfirmed write. Slider values show requested settings,
+not measured brightness or colour temperature.
 
-## Brightness, warmth and restoration
+If the current package still reports rejection, use Windows display settings,
+Windows Night light or monitor controls. Check whether HDR, a full-screen app
+or another colour tool controls the output. Administrator access and disabling
+security software are not general workarounds. Include the status message and
+driver version in a report. Use a calibrated workflow for colour-sensitive work;
+HDR and concurrent calibration are not validated here.
 
-Enable DDC/CI in the monitor's on-screen menu if supported. Try a direct cable
-when a dock or adapter interferes. Software gamma also depends on driver support.
-A successful API return does not guarantee visible change.
+## Hardware brightness does not respond
 
-Pause care attempts to restore stored gamma; it leaves hardware brightness at
-its last setting. Exit normally before upgrades. Forced termination cannot run
-restoration. Recapturing while a tint is active can save the tint as a baseline.
-Do not use recapture as a general repair without first understanding that state.
-HDR, ICC and concurrent colour tools are not validated.
+DDC/CI must be supported and enabled in the monitor menu. Docks, adapters and
+cables may block it. Try a direct supported connection and Refresh. A sent
+command without readback is unconfirmed. MonitorMate keeps rejected values
+retryable rather than caching them as successfully applied.
 
-Setup completion gates automatic launch behavior but does not block all direct
-controls. Disabled display preferences are not enforced by every path. These
-are open defects; see [the audit](../docs/AUDIT.md).
+## Restore colour and leave an overlay
 
-## Breaks and focus
+Pause care or exit normally to attempt software colour restoration. Hardware
+brightness stays at its last value unless explicitly reset or changed with monitor
+controls. Reset reports failures instead of claiming unconditional restoration.
+Avoid deleting gamma records while MonitorMate is active. Forced termination
+cannot perform cleanup; use system/monitor controls if normal restoration fails.
 
-Scheduled strict breaks hide skip; manually requested breaks remain skippable.
-Focus uses click-through overlays. Esc normally ends focus if Windows registers
-the key. Editing/disabling shortcuts during a session can remove that registration;
-the Focus page or tray can end the session. Small captions and screen-reader
-behavior need further testing. Screen-time is an estimate while the app runs,
-and break minutes currently overcount skipped breaks of at least one minute.
+Esc ends focus when Windows grants the registration. The Focus page and tray
+provide other exits. Manually requested breaks remain skippable. Strict scheduled
+Windows breaks have different skip behavior. Linux/macOS preview breaks are
+skippable; closing the app stops reminders.
 
-## Startup and delivery
+## Automatic changes and startup
 
-Desktop Start with Windows uses a per-user Run key. The packaged UI hides that
-toggle; StartupTask integration is not implemented. Desktop and portable builds
-need .NET 10 Desktop Runtime x64. Keep portable supporting files together.
-Code signing and SmartScreen are separate; no warning-free guarantee applies.
-See [signing](../docs/SIGNING.md).
+First launch offers manual or automatic display control. You can use manual
+controls after declining automation and revisit the choice later. Scheduling
+and launch/resume restoration require app consent. Start with Windows is a
+separate per-user Run entry. No choice requests administrator or capture permission.
 
-## Remove a desktop or portable copy
+## Update or uninstall Windows
 
-1. Disable Start with Windows in MonitorMate if enabled.
-2. Locate Settings > Open data folder and note its location if you want to retain or remove data.
-3. Exit MonitorMate normally from its tray menu or Settings.
-4. Remove `%LOCALAPPDATA%\Programs\MonitorMate` for the script-installed copy,
-   or the portable folder you chose. Remove the MonitorMate Desktop and Start
-   Menu shortcuts if present. The script installer does not register an Apps uninstaller.
-5. Optionally remove the resolved data folder, normally `%APPDATA%\MonitorMate`,
-   only if you intend to lose history, settings and gamma baselines. Review
-   backup/export locations separately.
+1. Exit normally from the tray or Settings. Closing the main window can leave
+   MonitorMate running in the tray.
+2. Run the current installer. It includes the runtime and installs for your
+   account into `%LOCALAPPDATA%\Programs\MonitorMate`.
+3. To uninstall, disable Start with Windows first if enabled, exit normally,
+   then use Windows Settings > Apps > MonitorMate. The installer checks that
+   the app is closed.
+4. Uninstall preserves settings/history. To discard data too, note Settings >
+   Open data folder before exit, then remove that resolved folder. The default
+   is `%APPDATA%\MonitorMate`; an environment override may change it.
+5. Review backups and exports separately. Data removal is not secure erasure
+   and may be irreversible.
 
-For an installed MSIX, use Windows Settings > Apps to uninstall the package.
-Packaged data cleanup and any desktop-copy data must be checked separately.
-The draft package has not been installed and tested by this audit.
+Older script-installed or extracted copies may lack an Apps entry. Remove only
+their chosen app folder and shortcuts after exit. Source/framework-dependent
+builds need .NET 10 Desktop Runtime; release installers include the runtime.
+Store/MSIX preparation files do not establish a shipped Store edition.
 
-MonitorMate is a comfort utility and does not diagnose or treat medical conditions.
+## Remove Linux or macOS reminders
 
-
-## Current release-plan clarification
-
-The GitHub preview is for evaluation without a configured expiry. Paid Store
-distribution is a future proposal, so the current documentation makes no paid
-support or subscription commitment. The public [SUPPORT.md](../SUPPORT.md) links
-this guide and preserves the same recovery/removal limitations. See
-[release model](../docs/RELEASE_MODEL.md).
+Close the app, then remove the AppImage or matching app from Applications. To
+discard saved rhythm and totals, remove `MonitorMate/ReminderPreview` under the
+OS local application-data directory. App removal alone does not remove settings.
+These builds have no background service or auto-start.

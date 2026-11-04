@@ -228,7 +228,7 @@ public sealed class ComfortViewModel : ObservableObject
         {
             await _services.Comfort.ApplyPresetAsync(presetId);
             RefreshPresetBadges();
-            Message = $"{PresetCatalog.Get(presetId).Name} is now active on every display.";
+            Message = _services.Comfort.GetApplySummary(PresetCatalog.Get(presetId).Name);
         }
         finally
         {

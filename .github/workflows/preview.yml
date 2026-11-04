@@ -5,7 +5,22 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  actions: read
 jobs:
+  arm-plan:
+    runs-on: ubuntu-22.04
+    outputs:
+      reuse: ${{ steps.plan.outputs.reuse }}
+      runner: ${{ steps.plan.outputs.runner }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - id: plan
+        name: Check unchanged native ARM build evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 tools/reuse_verified_arm.py
   windows:
     runs-on: windows-latest
     timeout-minutes: 25
@@ -48,8 +63,6 @@ jobs:
             rid: linux-x64
           - runner: macos-26-intel
             rid: osx-x64
-          - runner: macos-26
-            rid: osx-arm64
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 25
     steps:
@@ -114,9 +127,44 @@ jobs:
         with:
           name: ${{ matrix.rid }}-ui-evidence
           path: artifacts/portable-ui/*.png
+  arm:
+    name: Mac ARM native build or verified unchanged reuse
+    needs: arm-plan
+    runs-on: ${{ needs.arm-plan.outputs.runner }}
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Recheck inputs and download verified native ARM bundle
+        if: needs.arm-plan.outputs.reuse == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 tools/reuse_verified_arm.py --download
+      - uses: actions/setup-dotnet@v6
+        if: needs.arm-plan.outputs.reuse != 'true'
+        with:
+          dotnet-version: '10.0.x'
+      - name: Test and build on native ARM hardware
+        if: needs.arm-plan.outputs.reuse != 'true'
+        run: |
+          set -euo pipefail
+          dotnet run --project tests/MonitorMate.Reminders.Tests/MonitorMate.Reminders.Tests.csproj
+          dotnet run --project tests/MonitorMate.Desktop.Tests/MonitorMate.Desktop.Tests.csproj
+          dotnet publish src/MonitorMate.Desktop/MonitorMate.Desktop.csproj -c Release -r osx-arm64 --self-contained true -p:UseAppHost=true -p:PublishSingleFile=false -o artifacts/osx-arm64
+          ./artifacts/osx-arm64/MonitorMate.Desktop --smoke-test
+          ./artifacts/osx-arm64/MonitorMate.Desktop --ui-smoke
+          python3 tools/package_macos.py arm64
+          cd artifacts
+          ditto -c -k --sequesterRsrc --keepParent 'MonitorMate (Apple Silicon).app' osx-arm64.zip
+      - uses: actions/upload-artifact@v6
+        with:
+          name: osx-arm64-package
+          path: artifacts/osx-arm64.zip
+          if-no-files-found: error
   mac-dmg:
-    needs: portable
-    runs-on: macos-26
+    needs: [portable, arm]
+    runs-on: macos-26-intel
     steps:
       - uses: actions/download-artifact@v7
         with:

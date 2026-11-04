@@ -7,7 +7,7 @@ using MonitorMate.Core.Models;
 
 namespace MonitorMate.Core.Services;
 
-public sealed record GammaApplyResult(bool Success, bool Unconfirmed, string? Message = null)
+public sealed record GammaApplyResult(bool Success, bool Unconfirmed, string? Message = null, bool Limited = false)
 {
     public static GammaApplyResult Ok() => new(true, false);
     public static GammaApplyResult Unverified(string message) => new(true, true, message);
@@ -90,33 +90,44 @@ public sealed class GammaService : IDisposable
                 var scale = ComputeScale(info.HardwareBrightnessSupported, brightness, softwareDim);
                 var rgb = KelvinMultipliers(temperatureK);
                 var target = Compose(record.Ramp, scale, rgb);
+                var limited = false;
+                for (var index = 0; index < target.Length; index++)
+                {
+                    // GDI permits less than half-range deviation from the identity ramp.
+                    var identity = (index % 256) * 257;
+                    var bounded = (ushort)Math.Clamp((int)target[index], Math.Max(0, identity - 32767), Math.Min(65535, identity + 32767));
+                    limited |= bounded != target[index];
+                    target[index] = bounded;
+                }
+                var limitMessage = limited ? "Windows gamma limits reduced the requested dimming or warmth. Slider values are targets." : null;
                 var targetSignature = Signature(target);
                 var effectiveCurrent = ReadRamp(dc) ?? current;
                 var currentNow = Signature(effectiveCurrent);
 
-                if (currentNow == targetSignature)
+                if (RampsMatch(effectiveCurrent, target))
                 {
-                    record.AppliedSignature = targetSignature;
+                    record.AppliedSignature = currentNow;
                     record.AppliedUtc = DateTime.UtcNow;
                     SaveIfDue(force: false);
-                    return GammaApplyResult.Ok();
+                    return new GammaApplyResult(true, false, limitMessage, limited);
                 }
 
                 var wrote = WriteRamp(dc, target);
                 var verified = ReadRamp(dc);
                 var verifiedSignature = verified is null ? string.Empty : Signature(verified);
-                var unconfirmed = !wrote || verified is null || verifiedSignature != targetSignature;
+                var unconfirmed = !wrote || verified is null || !RampsMatch(verified, target);
                 if (!wrote)
                 {
-                    return GammaApplyResult.Failed("Windows rejected the colour adjustment.");
+                    return GammaApplyResult.Failed("Windows or the display driver rejected colour control. Use Windows Night light or monitor controls; administrator access is not required.");
                 }
 
-                record.AppliedSignature = targetSignature;
+                // Retain the observed owned ramp so quantized readback cannot become a new baseline.
+                record.AppliedSignature = !unconfirmed ? verifiedSignature : targetSignature;
                 record.AppliedUtc = DateTime.UtcNow;
                 SaveIfDue(force: false);
                 return unconfirmed
-                    ? GammaApplyResult.Unverified("Windows accepted the request, but the driver did not report the new ramp.")
-                    : GammaApplyResult.Ok();
+                    ? GammaApplyResult.Unverified("Windows accepted the request, but the driver did not confirm it. Check HDR, Windows Night light and other colour tools.")
+                    : new GammaApplyResult(true, false, limitMessage, limited);
             }
             catch (Exception ex)
             {
@@ -346,6 +357,9 @@ public sealed class GammaService : IDisposable
 
     private static string Signature(ushort[] ramp)
         => Convert.ToHexString(SHA256.HashData(MemoryMarshal.AsBytes(ramp.AsSpan())));
+
+    private static bool RampsMatch(ushort[] actual, ushort[] expected)
+        => actual.Length == expected.Length && actual.Zip(expected).All(pair => Math.Abs(pair.First - pair.Second) <= 257);
 
     private static bool IsValidRamp(ushort[]? ramp) => ramp is { Length: 768 };
 

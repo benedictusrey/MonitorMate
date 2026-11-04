@@ -1,79 +1,61 @@
 # Architecture and data flow
 
-Current preview scope and audit: [portable preview](PORTABLE_PREVIEW.md) and [UI audit](UI_AUDIT.md).
-Earlier implementation/planning notes below are retained as history.
+MonitorMate has a Windows WPF host, a portable Avalonia reminder host and a small
+shared reminder engine. One interactive user runs each app. Windows serializes
+display requests; this is not a multi-user service or remote display controller.
 
-Reviewed against the local source on 4 November 2026. MonitorMate targets
-`net10.0-windows`, x64, using WPF plus Windows Forms for the tray icon.
-The project declares no external NuGet package references.
+## Hosts and services
 
-## Components
-
-| Layer | Responsibility |
+| Component | Responsibility |
 |---|---|
-| `App.xaml.cs` | Composition, local-session mutex, hotkeys/tray, launch and shutdown. |
-| `MainWindow.xaml(.cs)` | Custom chrome, page host, close-to-tray and navigation animation. |
-| `Core/Models` | Settings, display state, presets, gamma records and usage totals. |
-| `Core/ViewModels` | Seven page models, commands, formatting and overlay models. |
-| `Core/Services/AppServices.cs` | Service composition and disposal order. |
-| `DisplayService` | Display enumeration, DDC probe/write/readback and physical-handle leases. |
-| `GammaService` | Read/compose/write/restore gamma and baseline persistence. |
-| `ComfortService` | Presets, per-display applies, pause, refresh and manual holds. |
-| `ScheduleService`, `SolarCalculator` | Fixed/solar period resolution and 30-second schedule ticks. |
-| `ReminderService`, `OverlayService` | Work/break state and per-display overlay windows. |
-| `FocusSessionService`, `HotkeyService` | Focus lifecycle, countdown and Escape/global keys. |
-| `UsageTracker`, `UsageStore` | Minute sampling, counters and JSON history. |
-| `SettingsService`, `LogService` | Debounced JSON settings and rotating diagnostics. |
-| `Themes`, `Controls`, `Views` | XAML resources, custom drawing, pages and overlays. |
+| `src/MonitorMate` | Full Windows app, seven pages, native monitor controls, focus/break overlays, tray and shortcuts. |
+| `ComfortService` | Per-display preferences, presets, apply serialization and explicit outcomes. |
+| `GammaService` | Baseline composition, Windows gamma bounds, readback tolerance and restoration records. |
+| `DisplayService` | Monitor enumeration, DDC/CI write/readback and physical-handle lifetimes. |
+| `ScheduleService` and `SolarCalculator` | Fixed/solar periods, local dates and manual holds. |
+| `ReminderService`, `FocusSessionService`, `OverlayService` | Windows timer and overlay lifecycles. |
+| `SettingsService`, `UsageStore`, `LogService` | Local persistence, recovery and rotating logs. |
+| `src/MonitorMate.Reminders` | Pure portable reminder state/timing, without display APIs. |
+| `src/MonitorMate.Desktop` | Avalonia reminder UI and independent local settings. |
 
-## Startup and writes
+## Consent and display outcomes
 
-App creates services and view models, scans displays, then initializes reminders
-and usage tracking. Completed setup allows automatic schedule/restore behavior.
-Manual apply paths do not all enforce setup, which is an open defect.
+Startup scans displays without applying settings. Completed manual setup permits
+direct controls. Automatic scheduling and launch/resume restoration also require
+explicit app consent. Disabled displays do not receive apply writes.
 
-Comfort serializes display applies with a semaphore. Gamma work runs on a worker
-and uses a service lock. DDC work uses a separate display-service lock and worker.
-An apply composes gamma, then sends changed hardware values. Failure/readback
-semantics are imperfect; see [audit](AUDIT.md). There is no hardware simulator or
-dedicated automated test project in the authored tree.
+A semaphore serializes display applies. Gamma uses a locked worker path; DDC/CI
+uses its own locked display service. Target gamma values come from the saved
+baseline, then stay inside Windows' allowed deviation from identity. Readback
+accepts one 8-bit step of quantization and retains the observed signature to avoid
+recapturing MonitorMate's own tint. Limited targets are disclosed.
 
-## Persistence
+Display outcomes distinguish confirmed, limited, partial, unconfirmed and failed
+requests. Read support is not write support. View models summarize these outcomes
+instead of inferring success from a completed Task. Hardware support and HDR
+remain external constraints; see [verification](VERIFICATION.md).
 
-`AppPaths` resolves `MONITOR_MATE_DATA_DIR`, otherwise Roaming ApplicationData
-plus `MonitorMate`. Files include `settings.json`, `usage.json`,
-`gamma-baselines.json`, `diagnostics.txt`, and `logs/monitormate.log`.
-Settings use a 900 ms debounce; usage flushes every 45 seconds. Gamma records
-are saved with signatures. JSON writes use a temporary file and overwrite move.
+## Persistence and shutdown
 
-Settings and gamma attempt corrupt-file backups. Usage load failure starts empty
-without the same backup path. Usage filters records older than 120 days on load;
-logs retain a rotated `.1` file at an approximately 1 MB threshold. Backups and
-exports have no automatic expiry. There is no encryption-at-rest layer.
+Windows resolves `MONITOR_MATE_DATA_DIR`, otherwise Roaming ApplicationData plus
+`MonitorMate`. Settings, usage and gamma records use temporary-file replacement.
+Unreadable files have recovery/backup handling. History filters a 120-day window
+on load; logs rotate around 1 MB. Backups and exports have no automatic expiry.
+The [privacy policy](../PRIVACY.md) defines the stored data and removal behavior.
 
-## Shutdown and native limits
+Normal restart disposes services before launching a replacement. Normal exit
+attempts software gamma restoration; forced termination cannot do so. Installer
+updates require normal exit and do not force-stop an active app. Hardware
+brightness remains at its last setting unless explicitly reset.
 
-Normal shutdown disposes focus/reminders/schedule/overlays, then comfort and gamma
-attempt restoration. Forced termination cannot execute this cleanup. Restart
-currently starts another instance before service disposal completes, creating a
-restoration/persistence race. The installer also uses a forced stop for matching
-installed `dotnet` processes.
+Portable settings use the OS local application-data directory under
+`MonitorMate/ReminderPreview`. Closing that host stops reminders. It has no
+background service, screen-time tracker, display adapter or cross-host migration.
 
-Display IDs include device information that can change with ports/topology.
-Gamma is a legacy driver interface, not HDR/ICC calibration. Multi-monitor hot
-plug, DPI boundaries and concurrent colour tools require hardware testing.
+## Distribution
 
-
-## Preview distribution boundary
-
-The v1.0.0 GitHub preview adds no expiry, StoreContext, purchase flow or account
-service to this architecture. Paid Store distribution is only a
-[proposal](RELEASE_MODEL.md). Source-license adoption is still pending.
-The new documentation checker and CI compile/check files without launching the app.
-
-
-## Proposed portable host
-
-A separate Avalonia host and OS-specific adapters are proposed in
-[CROSS_PLATFORM.md](CROSS_PLATFORM.md). The current WPF/Win32 application remains
-unchanged. Shared models alone do not port display control, overlays or session APIs.
+The source uses MIT. The v1.0.0 GitHub preview has a per-user Windows installer,
+Linux AppImage and DMG with separate Intel/Apple Silicon apps. The native workflow
+may reuse a successful ARM bundle only after matching every declared build/test
+input and verifying the artifact digest. A paid Store edition remains a future
+plan; no expiry, account, purchase service or automatic updater is present.

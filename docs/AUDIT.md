@@ -3,7 +3,7 @@
 Current candidate status: [RELEASE_READINESS.md](RELEASE_READINESS.md).
 Earlier failure/open-status statements below describe the original audit snapshot.
 
-**Verdict: public release readiness is blocked.** Documentation is prepared;
+**Historical verdict at the initial audit: public release readiness was blocked.** Documentation was prepared;
 application defects remain open. This was a source/documentation audit with
 build verification and saved screenshot inspection, not a complete live hardware
 or accessibility certification pass.

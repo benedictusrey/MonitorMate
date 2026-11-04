@@ -54,8 +54,11 @@ public sealed class DisplayInfo
             : DisplayControlPath.Unavailable;
 }
 
+public enum DisplayApplyOutcome { NotApplied, Confirmed, Limited, Unconfirmed, Partial, Failed }
+
 public sealed class DisplayState
 {
+    public DisplayApplyOutcome ApplyOutcome { get; set; }
     public required DisplayInfo Info { get; init; }
     public DisplayPreference Preference { get; init; } = new();
     public int AppliedBrightness { get; set; }

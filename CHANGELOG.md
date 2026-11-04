@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.0.0 compatibility and documentation refresh
+
+- Bound software gamma ramps to Windows safety limits and report reduced adjustments.
+- Accept normal 8-bit readback without recapturing the app's tint as a baseline.
+- Report actual preset, match and reset outcomes instead of unconditional success.
+- Enable private vulnerability reporting and clarify security, privacy and removal.
+- Verify unchanged native ARM build inputs before reusing a successful artifact.
+
+
 ## v1.0.0 preview refresh — 5 November 2026
 
 - Fix Windows button labels overriding their intended text colors.
@@ -16,8 +25,8 @@
 - Cover reminder state, persistence, pointer/keyboard input and page rendering.
 
 
-Changes describe the local source and prepared documents. Dates are not proof of
-public publication. Version 1.0.0 is intended as a GitHub preview.
+The public release remains v1.0.0. Earlier preparation entries below are historical;
+current package provenance appears on the release page.
 
 ## Unreleased
 
@@ -26,14 +35,14 @@ public publication. Version 1.0.0 is intended as a GitHub preview.
 - Prepared contributor, support, security, authorship and third-party guidance.
 - Added issue forms, a pull-request template, build/documentation CI and repository metadata proposals.
 - Documented the future commercial Store plan without adding a timed trial.
-- Retained MIT as a license proposal; no root license has been adopted.
+- Prepared licensing guidance; MIT was subsequently adopted in the root LICENSE.
 
 ## 1.0.0 preview, prepared 4 November 2026
 
 - Windows WPF display controls, comfort presets and schedules.
 - Break reminders, reading-band/spotlight focus, tray and hotkeys.
 - Local activity history and diagnostic tools.
-- Source audit and model/math probes; eight P1 findings remain open.
+- Initial source audit and model/math probes identified eight P1 findings, subsequently addressed in the repaired preview.
 
 Read [release notes](RELEASE_NOTES.md) and [audit findings](docs/AUDIT.md).
 

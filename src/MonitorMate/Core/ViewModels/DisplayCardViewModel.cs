@@ -40,7 +40,7 @@ public sealed class DisplayCardViewModel : ObservableObject
     public bool HardwareBrightnessSupported => Info.HardwareBrightnessSupported;
     public bool HardwareContrastSupported => Info.HardwareContrastSupported;
     public bool GammaSupported => Info.GammaSupported;
-    public string GammaStatusText => Info.GammaSupported ? "Available" : "Unavailable";
+    public string GammaStatusText => Info.GammaSupported ? "Readable" : "Unavailable";
     public bool CanAdjustContrast => Info.HardwareContrastSupported;
     public bool ShowExtraDim => Info.HardwareBrightnessSupported;
     public string BrightnessCaption => Info.HardwareBrightnessSupported ? "Hardware brightness" : "Software brightness";

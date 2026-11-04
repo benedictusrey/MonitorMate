@@ -1,15 +1,32 @@
-# MonitorMate v1.0.0 — GitHub preview
+# MonitorMate v1.0.0 GitHub preview
 
 MonitorMate combines display comfort and break reminders. This preview provides the full Windows app and a smaller reminder app on Linux/macOS.
 Created by **Benedictus RH (@benedictusrey)**. MIT licensed; no timed trial or expiry.
 
-## Refreshed preview — 5 November 2026
+## Refreshed preview, 5 November 2026
 
 All app versions and platform downloads remain **v1.0.0**, as requested by the
 owner. This refreshed preview fixes Windows button-label contrast, shared window
 typography and cleanup of idle saved colour baselines. Current source revisions
 and SHA-256 checksums are recorded with the release. Replace earlier preview
 downloads when evaluating these fixes.
+
+## Display-control compatibility and security
+
+Software dimming and warmth now stay within Windows' documented gamma range.
+Strong requests may be reduced; the UI reports that limit. Normal 8-bit readback
+is accepted without saving the app's own tint as a new baseline. Preset, match
+and reset messages reflect confirmed, partial, limited or failed results.
+
+A readable gamma ramp does not guarantee write support. Driver rejection can
+still occur, especially with HDR or other colour tools. Manual/automatic consent
+does not grant Windows privileges. Use Windows Night light or monitor controls
+if colour control remains unavailable; administrator access is not a general fix.
+
+Private vulnerability reporting is enabled. [Security](SECURITY.md), [Privacy](PRIVACY.md)
+and [Support](SUPPORT.md) explain permissions, local files, retention, recovery
+and download trust. Files are not encrypted by the app. Checksums establish
+byte integrity, not independent security clearance.
 
 ## Windows
 

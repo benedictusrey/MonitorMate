@@ -20,6 +20,75 @@ internal static class Program
     public static int Main()
     {
         Environment.SetEnvironmentVariable("MONITOR_MATE_DATA_DIR", Path.Combine(Path.GetTempPath(), "MonitorMate-regression-" + Guid.NewGuid().ToString("N")));
+        Run("All presets respect the Windows gamma safety range", () =>
+        {
+            foreach (var preset in PresetCatalog.All)
+            {
+                var fixture = Create(true, true, hardware: false);
+                var result = fixture.Gamma.Apply(fixture.Info, preset.Brightness, preset.TemperatureK, preset.SoftwareDim);
+                Require(result.Success, preset.Name + " was rejected by the documented Windows gamma bounds.");
+                Require(!result.Unconfirmed, preset.Name + " was not confirmed by the simulated driver.");
+            }
+        });
+        Run("Deep software dimming reports its effective range limit", () =>
+        {
+            var fixture = Create(true, true, hardware: false);
+            var result = fixture.Gamma.Apply(fixture.Info, 46, 3600, 0);
+            Require(result.Success && result.Message?.Contains("limit", StringComparison.OrdinalIgnoreCase) == true,
+                "Requested dimming was rejected or silently changed without explaining its limit.");
+        });
+        Run("Driver rejection never becomes preset success in either mode", () =>
+        {
+            foreach (var automatic in new[] { false, true })
+            {
+                var fixture = Create(true, true, hardware: false);
+                fixture.Settings.Settings.AutomaticDisplayControlAllowed = automatic;
+                NativeMethods.RejectGammaWrites = true;
+                var services = new AppServices { Comfort = fixture.Comfort, Displays = fixture.Displays, Settings = fixture.Settings, Log = fixture.Log };
+                var viewModel = new DisplaysViewModel(services);
+                var task = (Task)typeof(DisplaysViewModel).GetMethod("ApplyPresetAsync", BindingFlags.NonPublic | BindingFlags.Instance)!
+                    .Invoke(viewModel, new object[] { "night" })!;
+                task.GetAwaiter().GetResult();
+                Require(viewModel.Message?.Contains("not applied", StringComparison.OrdinalIgnoreCase) == true,
+                    "A rejected gamma write was reported as an applied preset.");
+                NativeMethods.RejectGammaWrites = false;
+            }
+        });
+        Run("Silent gamma rejection remains unconfirmed", () =>
+        {
+            var fixture = Create(true, true, hardware: false);
+            NativeMethods.IgnoreGammaWrites = true;
+            var result = fixture.Gamma.Apply(fixture.Info, 85, 5600, 0);
+            Require(result.Unconfirmed, "Silent driver rejection was reported as confirmed.");
+        });
+        Run("Reset does not claim success when colour restoration fails", () =>
+        {
+            var fixture = Create(true, true, hardware: false);
+            fixture.Comfort.ApplyPresetAsync("night").GetAwaiter().GetResult();
+            NativeMethods.RejectGammaWrites = true;
+            var services = new AppServices { Comfort = fixture.Comfort, Displays = fixture.Displays, Settings = fixture.Settings, Log = fixture.Log };
+            var viewModel = new DisplaysViewModel(services);
+            ((Task)typeof(DisplaysViewModel).GetMethod("ResetSelectedAsync", BindingFlags.NonPublic | BindingFlags.Instance)!.Invoke(viewModel, null)!).GetAwaiter().GetResult();
+            Require(viewModel.Message?.Contains("not applied") == true, "Failed reset was reported as restored.");
+        });
+        Run("No enabled display is never reported as applied", () =>
+        {
+            var fixture = Create(true, false);
+            var services = new AppServices { Comfort = fixture.Comfort, Displays = fixture.Displays, Settings = fixture.Settings, Log = fixture.Log };
+            var viewModel = new DisplaysViewModel(services);
+            ((Task)typeof(DisplaysViewModel).GetMethod("ApplyPresetAsync", BindingFlags.NonPublic | BindingFlags.Instance)!.Invoke(viewModel, new object[] { "night" })!).GetAwaiter().GetResult();
+            Require(viewModel.Message?.Contains("No enabled displays") == true, "Disabled target was reported as applied.");
+        });
+        Run("Quantized readback confirms without recapturing its tint", () =>
+        {
+            var fixture = Create(true, true, hardware: false);
+            var original = NativeMethods.Ramp.ToArray();
+            NativeMethods.QuantizeGamma = true;
+            var result = fixture.Gamma.Apply(fixture.Info, 85, 5600, 0);
+            Require(result.Success && !result.Unconfirmed, "An 8-bit driver readback was rejected by exact 16-bit comparison.");
+            fixture.Gamma.RecaptureBaseline(fixture.Info);
+            Require(NativeMethods.Ramp.SequenceEqual(original), "Quantized own tint became the new baseline.");
+        });
         Run("Reset updates the preferences used by display apply", () =>
         {
             var state = new DisplayState { Info = Info(), Preference = new DisplayPreference { Brightness = 30, TemperatureK = 3600, SoftwareDim = 20 } };
@@ -205,19 +274,22 @@ internal static class Program
         Console.WriteLine($"{_checks} checks; {_failed} failures. Native display/hotkey boundaries were simulated.");
         return _failed == 0 ? 0 : 1;
     }
-    private static DisplayInfo Info() => new()
+    private static DisplayInfo Info(bool hardware = true) => new()
     {
         Id = Guid.NewGuid().ToString("N"), DeviceName = "regression-only", Name = "Fixture", AdapterName = "Simulated",
-        Bounds = new PixelRect(), WorkArea = new PixelRect(), HardwareBrightnessSupported = true,
+        Bounds = new PixelRect(), WorkArea = new PixelRect(), HardwareBrightnessSupported = hardware,
         HardwareBrightnessMax = 100, OriginalBrightness = 70, GammaSupported = true
     };
-    private static (ComfortService Comfort, GammaService Gamma, SettingsService Settings, LogService Log, DisplayInfo Info, DisplayService Displays) Create(bool setup, bool enabled)
+    private static (ComfortService Comfort, GammaService Gamma, SettingsService Settings, LogService Log, DisplayInfo Info, DisplayService Displays) Create(bool setup, bool enabled, bool hardware = true)
     {
+        NativeMethods.RejectGammaWrites = false;
+        NativeMethods.IgnoreGammaWrites = false;
+        NativeMethods.QuantizeGamma = false;
         NativeMethods.Ramp = Enumerable.Range(0, 768).Select(i => (ushort)((i % 256) * 257)).ToArray();
         var log = new LogService(AppPaths.LogFile);
         var settings = new SettingsService(log);
         settings.Replace(new AppSettings { SetupCompleted = setup, AutomaticDisplayControlAllowed = setup, ScheduleEnabled = setup, SoundEnabled = false, Breaks = new BreakSettings { SoundEnabled = false } });
-        var info = Info();
+        var info = Info(hardware);
         settings.Settings.DisplayPreferences[info.Id] = new DisplayPreference { Initialized = true, Enabled = enabled, TemperatureK = 3600, Brightness = 40 };
         var displays = new DisplayService(); displays.Infos.Add(info);
         var gamma = new GammaService(log);

@@ -1,5 +1,8 @@
 blank_issues_enabled: true
 contact_links:
+  - name: Report a security vulnerability privately
+    url: https://github.com/benedictusrey/MonitorMate/security/advisories/new
+    about: Share sanitized vulnerability details with the maintainer instead of a public issue.
   - name: Maintainer profile
     url: https://github.com/benedictusrey
     about: Confirm a private channel before sharing security or personal information.
