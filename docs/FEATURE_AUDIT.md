@@ -28,6 +28,11 @@ hardware requests; no remote users or server workloads are assumed.
    documents called fixed defects open and omitted a working private report path.
    The policies now describe the shipped scope, actual permissions, local data,
    removal, signing and recovery. Private vulnerability reporting is enabled.
+5. **Unselected navigation icons inherit black on a dark background.** The shared
+   list/item styles now set the readable secondary foreground while selected items
+   keep the accent colour. A failing/passing UI regression checks both states.
+   The existing vector icons remain intact; new bitmap assets would not fix the
+   inherited colour. See [Controls.xaml](../src/MonitorMate/Themes/Controls.xaml).
 
 ## Feature coverage and release boundary
 

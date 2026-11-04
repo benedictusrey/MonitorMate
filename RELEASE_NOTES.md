@@ -17,6 +17,8 @@ Software dimming and warmth now stay within Windows' documented gamma range.
 Strong requests may be reduced; the UI reports that limit. Normal 8-bit readback
 is accepted without saving the app's own tint as a new baseline. Preset, match
 and reset messages reflect confirmed, partial, limited or failed results.
+Unselected navigation icons now use a readable foreground, and longer control
+messages wrap without overlapping the reset buttons.
 
 A readable gamma ramp does not guarantee write support. Driver rejection can
 still occur, especially with HDR or other colour tools. Manual/automatic consent

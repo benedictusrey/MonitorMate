@@ -5,6 +5,7 @@
 - Bound software gamma ramps to Windows safety limits and report reduced adjustments.
 - Accept normal 8-bit readback without recapturing the app's tint as a baseline.
 - Report actual preset, match and reset outcomes instead of unconditional success.
+- Keep unselected navigation icons readable on the dark background.
 - Enable private vulnerability reporting and clarify security, privacy and removal.
 - Verify unchanged native ARM build inputs before reusing a successful artifact.
 

@@ -481,6 +481,7 @@
     </Style>
 
     <Style x:Key="NavList" TargetType="ListBox">
+        <Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Padding" Value="0" />
@@ -489,6 +490,7 @@
     </Style>
 
     <Style x:Key="NavItemContainer" TargetType="ListBoxItem">
+        <Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="AutomationProperties.Name" Value="{Binding Title}" />

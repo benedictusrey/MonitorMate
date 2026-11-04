@@ -37,6 +37,13 @@ internal static class Program
             ("settings",new SettingsView(),main.SettingsPage) };
         var output = Path.Combine(Environment.CurrentDirectory,"artifacts","ui-audit"); Directory.CreateDirectory(output);
         var failures = 0;
+        var nav = new ListBoxItem { Content="Today", Style=(Style)app.FindResource("NavItemContainer") };
+        nav.Measure(new Size(180,40)); nav.Arrange(new Rect(0,0,180,40)); nav.ApplyTemplate();
+        if(nav.Foreground is not SolidColorBrush navText || navText.Color != ((SolidColorBrush)app.FindResource("TextSecondaryBrush")).Color)
+        { failures++; Console.WriteLine("FAIL Unselected navigation icons inherit an unreadable foreground."); }
+        nav.IsSelected=true;
+        if(nav.Foreground is not SolidColorBrush activeNavText || activeNavText.Color != ((SolidColorBrush)app.FindResource("AmberBrush")).Color)
+        { failures++; Console.WriteLine("FAIL Selected navigation does not retain its accent color."); }
         if(shell.Foreground is not SolidColorBrush shellText || shellText.Color != ((SolidColorBrush)app.FindResource("TextPrimaryBrush")).Color)
         { failures++; Console.WriteLine("FAIL Main window does not apply its shared text color."); }
         foreach (var (name, view, model) in pages)
