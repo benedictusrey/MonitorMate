@@ -5,7 +5,7 @@
         Width="1920" Height="1080"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent"
         ShowInTaskbar="False" ResizeMode="NoResize" Topmost="True"
-        WindowStartupLocation="Manual" ShowActivated="True" IsHitTestVisible="False">
+        WindowStartupLocation="Manual" ShowActivated="True" IsHitTestVisible="False" Style="{StaticResource {x:Type Window}}">
     <Grid>
         <Path x:Name="Curtain" Fill="#0C100D" Opacity="{Binding DimOpacity}" IsHitTestVisible="False" />
         <Border HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,22,0,0"

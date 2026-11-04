@@ -5,7 +5,7 @@
         Width="1920" Height="1080"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent"
         ShowInTaskbar="False" ResizeMode="NoResize" Topmost="True"
-        WindowStartupLocation="Manual" ShowActivated="False" IsHitTestVisible="False">
+        WindowStartupLocation="Manual" ShowActivated="False" IsHitTestVisible="False" Style="{StaticResource {x:Type Window}}">
     <Grid Background="#660C100D">
         <Border HorizontalAlignment="Center" VerticalAlignment="Center"
                 Background="#F2161D16" BorderBrush="#2F3A2F" BorderThickness="1"

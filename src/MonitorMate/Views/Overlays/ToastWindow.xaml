@@ -5,7 +5,7 @@
         Width="404" SizeToContent="Height"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent"
         ShowInTaskbar="False" ResizeMode="NoResize" Topmost="True"
-        WindowStartupLocation="Manual" ShowActivated="False">
+        WindowStartupLocation="Manual" ShowActivated="False" Style="{StaticResource {x:Type Window}}">
     <Border Margin="12" Background="#F2161D16" BorderBrush="#2F3A2F" BorderThickness="1"
             CornerRadius="10" Padding="16,13,12,12">
         <Border.Effect>

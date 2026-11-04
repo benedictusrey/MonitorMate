@@ -7,7 +7,7 @@
         WindowStyle="None" AllowsTransparency="True" Background="Transparent"
         ShowInTaskbar="False" ResizeMode="NoResize" Topmost="True"
         WindowStartupLocation="Manual" ShowActivated="True"
-        KeyDown="Window_KeyDown" Closing="Window_Closing">
+        KeyDown="Window_KeyDown" Closing="Window_Closing" Style="{StaticResource {x:Type Window}}">
     <Grid>
         <Grid.Background>
             <RadialGradientBrush Center="0.7,0.08" GradientOrigin="0.7,0.08" RadiusX="0.9" RadiusY="0.9">

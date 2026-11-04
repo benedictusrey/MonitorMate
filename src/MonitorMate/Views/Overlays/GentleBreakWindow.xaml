@@ -1,4 +1,4 @@
-﻿<Window x:Class="MonitorMate.Views.Overlays.GentleBreakWindow"
+<Window x:Class="MonitorMate.Views.Overlays.GentleBreakWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:MonitorMate.Controls"
@@ -6,7 +6,7 @@
         Width="420" SizeToContent="Height"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent"
         ShowInTaskbar="False" ResizeMode="NoResize" Topmost="True"
-        WindowStartupLocation="Manual" ShowActivated="False">
+        WindowStartupLocation="Manual" ShowActivated="False" Style="{StaticResource {x:Type Window}}">
     <Border Margin="12" Background="#F218232D" BorderBrush="#3A4D59" BorderThickness="1"
             CornerRadius="14" Padding="18,16">
         <Border.Effect>
