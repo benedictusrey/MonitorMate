@@ -29,6 +29,7 @@ internal static class Program
         PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Error;
         using var services = new AppServices(); services.Settings.Replace(new());
         using var main = new MainViewModel(services, () => { }, () => { }, () => { }, (_, _, _) => false, () => { });
+        var shell = new MonitorMate.MainWindow(main);
         var pages = new (string Name, UserControl View, object Model)[] {
             ("today",new TodayView(),main.TodayPage),("displays",new DisplaysView(),main.DisplaysPage),
             ("comfort",new ComfortView(),main.ComfortPage),("breaks",new BreaksView(),main.BreaksPage),
@@ -36,6 +37,8 @@ internal static class Program
             ("settings",new SettingsView(),main.SettingsPage) };
         var output = Path.Combine(Environment.CurrentDirectory,"artifacts","ui-audit"); Directory.CreateDirectory(output);
         var failures = 0;
+        if(shell.Foreground is not SolidColorBrush shellText || shellText.Color != ((SolidColorBrush)app.FindResource("TextPrimaryBrush")).Color)
+        { failures++; Console.WriteLine("FAIL Main window does not apply its shared text color."); }
         foreach (var (name, view, model) in pages)
         {
             view.DataContext = model;

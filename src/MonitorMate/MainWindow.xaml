@@ -6,7 +6,7 @@
         xmlns:views="clr-namespace:MonitorMate.Views"
         xmlns:controls="clr-namespace:MonitorMate.Controls"
         Title="MonitorMate"
-        Icon="/Assets/monitormate.ico"
+        Icon="/MonitorMate;component/Assets/monitormate.ico"
         Width="1040" Height="650" MinWidth="920" MinHeight="610"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None" ResizeMode="CanResize"

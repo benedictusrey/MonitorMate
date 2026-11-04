@@ -37,7 +37,10 @@ not establish screen-reader or user text-scaling acceptance.
 
 - A final effective-color check found the global text style overriding button
   foregrounds. v1.0.1 removes that override so filled actions use dark, readable
-  labels; template checks cover the actual rendered text color.
+  labels; template checks cover the actual rendered text color. Derived windows
+  explicitly apply the existing shared Window style so ordinary text also inherits
+  the intended foreground and font. The harness now constructs the real main
+  window and verifies its foreground.
 - Several Windows labels were smaller than 11 DIPs. The page/template checks now
   enforce a consistent floor; chart labels were brought into line.
 - Focus-choice descriptions clipped at the default content width. They now wrap.
