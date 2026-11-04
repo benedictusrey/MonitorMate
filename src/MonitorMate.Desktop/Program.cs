@@ -10,7 +10,7 @@ public static class Program
         {
             var engine = new ReminderEngine(); engine.Start(1,5); engine.Advance(TimeSpan.FromMinutes(1));
             if (engine.Phase != ReminderPhase.Break) return 1;
-            Console.WriteLine($"MonitorMate 1.0.1 reminder preview: {System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier}");
+            Console.WriteLine($"MonitorMate 1.0.0 reminder preview: {System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier}");
             return 0;
         }
         using var instance = new Mutex(true,"MonitorMate.ReminderPreview",out var created);

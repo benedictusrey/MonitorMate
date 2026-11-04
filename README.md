@@ -2,7 +2,7 @@
 
 **Thoughtful display comfort for long days at the screen.**
 
-[![Preview](https://img.shields.io/badge/release-v1.0.1%20preview-d8b36a)](RELEASE_NOTES.md)
+[![Preview](https://img.shields.io/badge/release-v1.0.0%20preview-d8b36a)](RELEASE_NOTES.md)
 [![Windows x64](https://img.shields.io/badge/available_source-Windows%20x64-0078d4)](docs/INSTALLATION.md)
 [![MIT License](https://img.shields.io/badge/license-MIT-a9c6b2)](LICENSE)
 [![.NET 10](https://img.shields.io/badge/built_with-.NET%2010-512bd4)](src/MonitorMate/MonitorMate.csproj)
@@ -23,11 +23,11 @@ Created and maintained by **Benedictus RH ([@benedictusrey](https://github.com/b
 
 *Promotional illustration based on the app. The authentic interface capture appears below.*
 
-> **v1.0.1 GitHub preview.** Windows includes display controls, reminders and focus.
+> **v1.0.0 GitHub preview.** Windows includes display controls, reminders and focus.
 > Linux and macOS have a smaller reminder app with explicit capability limits.
 > Packages are unsigned or ad-hoc signed. This is a feedback preview with no timed
 > trial. Read [installation](docs/INSTALLATION.md) and [verification](docs/UI_AUDIT.md)
-> before using it. [Release page](https://github.com/benedictusrey/MonitorMate/releases/tag/v1.0.1).
+> before using it. [Release page](https://github.com/benedictusrey/MonitorMate/releases/tag/v1.0.0).
 
 ## Windows features
 

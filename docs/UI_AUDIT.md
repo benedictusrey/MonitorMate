@@ -36,7 +36,7 @@ not establish screen-reader or user text-scaling acceptance.
 ## Reproduced findings and repairs
 
 - A final effective-color check found the global text style overriding button
-  foregrounds. v1.0.1 removes that override so filled actions use dark, readable
+  foregrounds. v1.0.0 removes that override so filled actions use dark, readable
   labels; template checks cover the actual rendered text color. Derived windows
   explicitly apply the existing shared Window style so ordinary text also inherits
   the intended foreground and font. The harness now constructs the real main
@@ -95,6 +95,12 @@ it does not add Developer ID signing or notarization.
 [Portable reminder capture](screenshots/reminder-preview.png) is a framework-rendered
 interface capture from the test app. Existing promotional illustrations and earlier
 native captures remain clearly labelled in the README.
+
+All current app and package versions remain v1.0.0 at the owner's request.
+The refreshed Windows binary includes the later fixes. Linux/Mac packages may
+reuse the successful original native build only after all app, dependency notice
+and packaging input hashes are verified unchanged; per-asset provenance is
+recorded with the release.
 
 Mac 15 hosted jobs later failed to acquire runners after repeated attempts,
 with GitHub reporting capacity constraints. The matrix uses GitHub's supported

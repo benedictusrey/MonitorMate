@@ -7,7 +7,7 @@ $marker = Join-Path $dataDirectory 'installer-preserve-test.txt'
 if ((Test-Path -LiteralPath $installDirectory) -or (Test-Path -LiteralPath $marker)) { throw 'Installer fixture is not fresh.' }
 New-Item -ItemType Directory -Path $dataDirectory -Force | Out-Null
 [System.IO.File]::WriteAllText($marker, 'preserve this data')
-$installer = Join-Path $PSScriptRoot '..\artifacts\MonitorMate-1.0.1-windows-x64.exe'
+$installer = Join-Path $PSScriptRoot '..\artifacts\MonitorMate-1.0.0-windows-x64.exe'
 $mutex = [System.Threading.Mutex]::new($true, 'Local\MonitorMate.SingleInstance')
 try {
     $blocked = Start-Process -FilePath $installer -ArgumentList '/S' -WindowStyle Hidden -Wait -PassThru

@@ -1,7 +1,7 @@
 Unicode true
 !include "MUI2.nsh"
 Name "MonitorMate"
-OutFile "..\artifacts\MonitorMate-1.0.1-windows-x64.exe"
+OutFile "..\artifacts\MonitorMate-1.0.0-windows-x64.exe"
 InstallDir "$LOCALAPPDATA\Programs\MonitorMate"
 RequestExecutionLevel user
 Icon "..\src\MonitorMate\Assets\monitormate.ico"
@@ -31,7 +31,7 @@ Section "MonitorMate"
   WriteUninstaller "$INSTDIR\Uninstall.exe"
   CreateShortcut "$SMPROGRAMS\MonitorMate.lnk" "$INSTDIR\MonitorMate.exe"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\MonitorMate" "DisplayName" "MonitorMate"
-  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\MonitorMate" "DisplayVersion" "1.0.1"
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\MonitorMate" "DisplayVersion" "1.0.0"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\MonitorMate" "Publisher" "Benedictus RH"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\MonitorMate" "UninstallString" '$"$INSTDIR\Uninstall.exe$"'
 SectionEnd

@@ -2,7 +2,8 @@
 
 Download packages only from [MonitorMate releases](https://github.com/benedictusrey/MonitorMate/releases).
 Compare their SHA-256 values with the release's `SHA256SUMS.txt`. The preview does
-not expire and has no payment mechanism.
+not expire and has no payment mechanism. Refreshed preview files keep the same
+v1.0.0 version; compare the current release checksums when replacing an older download.
 
 ## Windows x64
 

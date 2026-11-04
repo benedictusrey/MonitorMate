@@ -37,7 +37,7 @@ jobs:
       - uses: actions/upload-artifact@v6
         with:
           name: windows-package
-          path: artifacts/MonitorMate-1.0.1-windows-x64.exe
+          path: artifacts/MonitorMate-1.0.0-windows-x64.exe
           if-no-files-found: error
   portable:
     strategy:
@@ -92,8 +92,8 @@ jobs:
           curl -fL https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage -o artifacts/appimagetool
           echo '62aebc77c2149e96b593b94da9bbd1881e0984a56399ff6d7a03b7ddd7c9ce68  artifacts/appimagetool' | sha256sum -c -
           chmod +x artifacts/appimagetool
-          ARCH=x86_64 artifacts/appimagetool --appimage-extract-and-run artifacts/AppDir artifacts/MonitorMate-1.0.1-linux-x64.AppImage
-          artifacts/MonitorMate-1.0.1-linux-x64.AppImage --appimage-extract-and-run --smoke-test
+          ARCH=x86_64 artifacts/appimagetool --appimage-extract-and-run artifacts/AppDir artifacts/MonitorMate-1.0.0-linux-x64.AppImage
+          artifacts/MonitorMate-1.0.0-linux-x64.AppImage --appimage-extract-and-run --smoke-test
       - name: Build Mac application bundle
         if: runner.os == 'macOS'
         shell: bash
@@ -107,7 +107,7 @@ jobs:
         with:
           name: ${{ matrix.rid }}-package
           path: |
-            artifacts/MonitorMate-1.0.1-linux-x64.AppImage
+            artifacts/MonitorMate-1.0.0-linux-x64.AppImage
             artifacts/osx-*.zip
           if-no-files-found: error
       - uses: actions/upload-artifact@v6
@@ -130,10 +130,10 @@ jobs:
           ditto -x -k bundles/osx-arm64.zip dmg
           ditto -x -k bundles/osx-x64.zip dmg
           ln -s /Applications dmg/Applications
-          hdiutil create -volname 'MonitorMate Preview' -srcfolder dmg -ov -format UDZO artifacts/MonitorMate-1.0.1-macos.dmg
-          hdiutil verify artifacts/MonitorMate-1.0.1-macos.dmg
+          hdiutil create -volname 'MonitorMate Preview' -srcfolder dmg -ov -format UDZO artifacts/MonitorMate-1.0.0-macos.dmg
+          hdiutil verify artifacts/MonitorMate-1.0.0-macos.dmg
       - uses: actions/upload-artifact@v6
         with:
           name: macos-package
-          path: artifacts/MonitorMate-1.0.1-macos.dmg
+          path: artifacts/MonitorMate-1.0.0-macos.dmg
           if-no-files-found: error

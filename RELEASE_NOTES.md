@@ -1,15 +1,15 @@
-# MonitorMate v1.0.1 — GitHub preview
+# MonitorMate v1.0.0 — GitHub preview
 
 MonitorMate combines display comfort and break reminders. This preview provides the full Windows app and a smaller reminder app on Linux/macOS.
 Created by **Benedictus RH (@benedictusrey)**. MIT licensed; no timed trial or expiry.
 
-## Patch update
+## Refreshed preview — 5 November 2026
 
-v1.0.1 fixes Windows button text contrast. A global text style had overridden
-button foregrounds, leaving pale labels on coral actions. Labels now inherit their
-control's intended color. New page-template checks cover the effective label color.
-Cleanup also skips saved gamma baselines that have no pending MonitorMate
-adjustment. The original v1.0.0 release and tag remain intact.
+All app versions and platform downloads remain **v1.0.0**, as requested by the
+owner. This refreshed preview fixes Windows button-label contrast, shared window
+typography and cleanup of idle saved colour baselines. Current source revisions
+and SHA-256 checksums are recorded with the release. Replace earlier preview
+downloads when evaluating these fixes.
 
 ## Windows
 

@@ -1,5 +1,5 @@
 {
-  "status": "Public source repository created; preview package workflow runs before release publication.",
+  "status": "Public v1.0.0 preview; same-version refresh prepared with verified platform provenance.",
   "repository": "benedictusrey/MonitorMate",
   "repository_visibility": "public",
   "remote_state": "Public benedictusrey/MonitorMate created and source pushed on 2026-11-04.",
@@ -30,8 +30,8 @@
   "wiki": false,
   "license": "MIT",
   "release": {
-    "tag": "v1.0.1",
-    "title": "MonitorMate v1.0.1 - GitHub preview",
+    "tag": "v1.0.0",
+    "title": "MonitorMate v1.0.0 - GitHub preview",
     "draft": true,
     "prerelease": true,
     "make_latest": false,

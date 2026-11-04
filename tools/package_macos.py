@@ -30,7 +30,7 @@ def main() -> None:
     subprocess.run(["iconutil", "-c", "icns", str(iconset), "-o", str(resources / "MonitorMate.icns")], check=True)
     info = {"CFBundleExecutable": "MonitorMate.Desktop", "CFBundleIdentifier": "dev.benedictusrey.monitormate.preview." + args.architecture,
             "CFBundleName": "MonitorMate", "CFBundleDisplayName": "MonitorMate Reminder Preview", "CFBundlePackageType": "APPL",
-            "CFBundleVersion": "1.0.1", "CFBundleShortVersionString": "1.0.1", "CFBundleIconFile": "MonitorMate.icns", "NSHighResolutionCapable": True,
+            "CFBundleVersion": "1.0.0", "CFBundleShortVersionString": "1.0.0", "CFBundleIconFile": "MonitorMate.icns", "NSHighResolutionCapable": True,
             "LSMinimumSystemVersion": "14.0"}
     (app / "Contents/Info.plist").write_bytes(plistlib.dumps(info))
     shutil.copy2(root / "LICENSE", resources / "LICENSE.txt")

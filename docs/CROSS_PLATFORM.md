@@ -17,9 +17,9 @@ portable host reports these limits rather than simulating successful display wri
 
 | Package | Scope | Architecture |
 |---|---|---|
-| `MonitorMate-1.0.1-windows-x64.exe` | Full WPF app, per-user NSIS installer. | Windows x64. |
-| `MonitorMate-1.0.1-linux-x64.AppImage` | Reminder preview. | Linux x64, initial Ubuntu 22.04+ X11/XWayland target. |
-| `MonitorMate-1.0.1-macos.dmg` | Two labelled reminder-preview app bundles. | Intel and Apple Silicon, macOS 14+. |
+| `MonitorMate-1.0.0-windows-x64.exe` | Full WPF app, per-user NSIS installer. | Windows x64. |
+| `MonitorMate-1.0.0-linux-x64.AppImage` | Reminder preview. | Linux x64, initial Ubuntu 22.04+ X11/XWayland target. |
+| `MonitorMate-1.0.0-macos.dmg` | Two labelled reminder-preview app bundles. | Intel and Apple Silicon, macOS 14+. |
 
 The DMG is one download with two native apps, not a Universal 2 executable. ARM
 Windows/Linux are not included. Packaging does not establish hardware or UI parity.

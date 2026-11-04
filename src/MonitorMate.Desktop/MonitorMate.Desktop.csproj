@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-<PropertyGroup><OutputType>WinExe</OutputType><TargetFramework>net10.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><Version>1.0.1</Version><Authors>Benedictus RH</Authors><ApplicationManifest>app.manifest</ApplicationManifest></PropertyGroup>
+<PropertyGroup><OutputType>WinExe</OutputType><TargetFramework>net10.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><Version>1.0.0</Version><Authors>Benedictus RH</Authors><ApplicationManifest>app.manifest</ApplicationManifest></PropertyGroup>
 <ItemGroup><ProjectReference Include="../MonitorMate.Reminders/MonitorMate.Reminders.csproj" /><PackageReference Include="Avalonia.Desktop" Version="12.1.4" /><PackageReference Include="Avalonia.Themes.Fluent" Version="12.1.4" /><PackageReference Include="Avalonia.Fonts.Inter" Version="12.1.4" /></ItemGroup>
 <ItemGroup><AvaloniaResource Include="Assets/**" /></ItemGroup>
   <ItemGroup>

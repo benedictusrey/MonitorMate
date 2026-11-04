@@ -1,4 +1,4 @@
-# v1.0.1 preview readiness
+# v1.0.0 preview readiness
 
 The owner approved a smaller Linux/macOS reminder preview alongside the full
 Windows app. Native display-feature parity is not a release claim. The source is
@@ -15,7 +15,9 @@ The [historical audit](AUDIT.md) describes the original code, not current pass/f
 The [native preview workflow](../.github/workflows/preview.yml) builds Windows x64,
 Linux x64, Mac Intel and Mac Apple Silicon. It constructs three primary downloads:
 a per-user Windows installer, Linux AppImage and dual-app Mac DMG. Publication
-requires successful native-runner jobs and verified downloaded artifact hashes.
+requires successful native-runner validation and verified downloaded artifact hashes.
+All versions remain v1.0.0. Reused platform packages must have unchanged verified
+build inputs and explicit per-asset source provenance.
 
 ## Preview limitations
 

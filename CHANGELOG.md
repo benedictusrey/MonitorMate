@@ -1,11 +1,11 @@
 # Changelog
 
-## 1.0.1 preview — 5 November 2026
+## v1.0.0 preview refresh — 5 November 2026
 
 - Fix Windows button labels overriding their intended text colors.
 - Leave untouched saved gamma baselines alone during display cleanup.
 - Add an effective label-color regression to the page-template harness.
-- Preserve the original v1.0.0 release and tag.
+- Keep all app and package versions at v1.0.0; record refreshed build provenance and checksums.
 
 ## 1.0.0 preview — 4 November 2026
 

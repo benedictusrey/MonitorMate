@@ -1,7 +1,7 @@
 # GitHub repository and preview settings
 
 Target repository: [benedictusrey/MonitorMate](https://github.com/benedictusrey/MonitorMate).
-The owner authorized public source publication and a v1.0.1 GitHub pre-release.
+The owner authorized public source publication and a v1.0.0 GitHub pre-release.
 The license is MIT and the author credit is **Benedictus RH (@benedictusrey)**.
 
 Repository About description, homepage and topics are recorded in
@@ -11,8 +11,9 @@ Issues are enabled; wiki and discussions remain disabled. Issue forms, support,
 privacy and security documents are included.
 
 The [preview workflow](../.github/workflows/preview.yml) builds all native payloads
-and packages. Only successful artifacts from one reviewed commit may be attached
-to the release. Three primary packages plus `SHA256SUMS.txt` are expected.
+and packages. Only successful, verified artifacts may be attached. Each asset records its build
+revision. A previous platform build may be reused only when all app, dependency
+notice and packaging inputs are verified unchanged. Three primary packages plus `SHA256SUMS.txt` are expected.
 The release is marked pre-release and kept off Latest. No trial expiry or billing
 is added. Check remote publication state rather than inferring it from this file.
 
