@@ -34,10 +34,12 @@ def main() -> None:
             "LSMinimumSystemVersion": "14.0"}
     (app / "Contents/Info.plist").write_bytes(plistlib.dumps(info))
     shutil.copy2(root / "LICENSE", resources / "LICENSE.txt")
-    for library in macos.rglob("*.dylib"):
-        subprocess.run(["codesign", "--force", "--sign", "-", str(library)], check=True)
     executable = macos / "MonitorMate.Desktop"
     executable.chmod(0o755)
+    # MacOS bundle contents are nested code, including managed assemblies.
+    for item in sorted(macos.rglob("*")):
+        if item.is_file() and item != executable:
+            subprocess.run(["codesign", "--force", "--sign", "-", str(item)], check=True)
     subprocess.run(["codesign", "--force", "--sign", "-", "--entitlements", str(root / "packaging/macos.entitlements"), str(executable)], check=True)
     subprocess.run(["codesign", "--force", "--sign", "-", "--entitlements", str(root / "packaging/macos.entitlements"), str(app)], check=True)
     subprocess.run(["codesign", "--verify", "--deep", "--strict", str(app)], check=True)

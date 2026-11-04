@@ -8,7 +8,7 @@ if ((Test-Path -LiteralPath $installDirectory) -or (Test-Path -LiteralPath $mark
 New-Item -ItemType Directory -Path $dataDirectory -Force | Out-Null
 [System.IO.File]::WriteAllText($marker, 'preserve this data')
 $installer = Join-Path $PSScriptRoot '..\artifacts\MonitorMate-1.0.0-windows-x64.exe'
-$mutex = New-Object System.Threading.Mutex($true, 'Local\MonitorMate.SingleInstance')
+$mutex = [System.Threading.Mutex]::new($true, 'Local\MonitorMate.SingleInstance')
 try {
     $blocked = Start-Process -FilePath $installer -ArgumentList '/S' -WindowStyle Hidden -Wait -PassThru
     if ($blocked.ExitCode -eq 0 -or (Test-Path -LiteralPath $installDirectory)) { throw 'Running-app install guard failed.' }

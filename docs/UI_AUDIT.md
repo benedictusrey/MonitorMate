@@ -60,6 +60,12 @@ The relevant tests failed before these fixes and passed afterward. The new remin
 state-machine tests first ran against a no-op implementation, then against the
 implemented timer. No synthetic screen-time totals or customer proof were added.
 
+CI also exposed a test that assumed Tokyo's sunrise would be the next event in
+all host time zones. It now compares the earliest actual next-day boundary.
+Mac bundle construction now signs every payload file before the apphost and bundle,
+including managed assemblies. This follows the framework's bundle-signing sequence;
+it does not add Developer ID signing or notarization.
+
 ## Checks and evidence
 
 - Windows domain/display-policy regressions use the real services with simulated

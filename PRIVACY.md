@@ -15,3 +15,9 @@ service should be described as already implemented. See [release model](docs/REL
 
 Do not send private settings, raw logs or personal screenshots to public issues.
 Use the [support](SUPPORT.md) and [security](SECURITY.md) guidance.
+
+The Linux/macOS reminder preview stores only its chosen rhythm and completed-break
+total under the OS local application-data directory, in `MonitorMate/ReminderPreview`.
+It does not sample screen time, capture screen content or send display commands.
+See [portable scope](docs/PORTABLE_PREVIEW.md). Its settings schema is separate
+from the Windows host's history and gamma baselines.

@@ -151,7 +151,7 @@ internal static class Program
             var snapshot = schedule.GetSnapshot(new DateTime(2026, 11, 4, 12, 0, 0));
             Require(!snapshot.Enabled && !string.IsNullOrEmpty(snapshot.Warning), "Contradictory boundaries remained active.");
         });
-        Run("Next solar change uses tomorrow's astronomical event", () =>
+        Run("Next solar change uses tomorrow's astronomical events", () =>
         {
             var fixture = Create(true, true);
             var settings = fixture.Settings.Settings;
@@ -159,8 +159,9 @@ internal static class Program
             settings.Latitude = 35; settings.Longitude = 139;
             using var schedule = new ScheduleService(fixture.Settings, fixture.Comfort, fixture.Log);
             var snapshot = schedule.GetSnapshot(new DateTime(2026, 11, 4, 23, 50, 0));
-            var expected = SolarCalculator.Calculate(new DateOnly(2026, 11, 5), 35, 139)!.Sunrise;
-            Require(snapshot.NextChange == expected, "Tomorrow's sunrise was copied from today's time.");
+            var tomorrow = SolarCalculator.Calculate(new DateOnly(2026, 11, 5), 35, 139)!;
+            var expected = new[] { tomorrow.Sunrise, tomorrow.Sunset, new DateTime(2026, 11, 5, 22, 30, 0) }.Min();
+            Require(snapshot.NextChange == expected, "Tomorrow's boundary was copied from today's time.");
         });
         Run("Short completed breaks accumulate time", () =>
         {
