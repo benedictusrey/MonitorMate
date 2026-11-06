@@ -1,6 +1,7 @@
 name: Build and documentation
 on:
   push:
+    branches: [main]
   pull_request:
   workflow_dispatch:
 permissions:
@@ -30,6 +31,10 @@ jobs:
         run: dotnet run --project tests/MonitorMate.UiAudit/MonitorMate.UiAudit.csproj -p:PublishSingleFile=false
       - name: Verify restart cleanup before handoff
         run: dotnet run --project tests/MonitorMate.Restart/MonitorMate.Restart.csproj -c ${{ matrix.configuration }} -p:PublishSingleFile=false
+      - name: Verify native and DLL-hosted startup commands
+        run: dotnet run --project tests/MonitorMate.Launch/MonitorMate.Launch.csproj -c ${{ matrix.configuration }}
+      - name: Verify framework-dependent DLL launch fallback
+        run: dotnet tests/MonitorMate.Launch/bin/${{ matrix.configuration }}/net10.0-windows/MonitorMate.Launch.dll
       - name: Verify packaging and upgrade failure handling
         run: python -m unittest discover -s tests -p "test_*.py"
       - name: Check local links and four-image README

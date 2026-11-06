@@ -90,7 +90,7 @@
                                         <Ellipse Width="4" Height="4" Fill="{StaticResource AmberBrush}" HorizontalAlignment="Right"
                                                  VerticalAlignment="Center" Visibility="{Binding IsCurrent, Converter={StaticResource BoolToVisibility}}" />
                                     </Grid>
-                                    <TextBlock Text="{Binding Detail}" FontSize="11" Foreground="{StaticResource TextMutedBrush}" Margin="0,2,0,0" />
+                                    <TextBlock Text="{Binding Detail}" TextWrapping="Wrap" FontSize="11" Foreground="{StaticResource TextMutedBrush}" Margin="0,2,0,0" />
                                 </StackPanel>
                             </Button>
                         </DataTemplate>
@@ -113,35 +113,35 @@
                         <TextBlock Text="{Binding WorkMinutes, StringFormat={}{0} min}" HorizontalAlignment="Right"
                                    FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" />
                     </Grid>
-                    <Slider Style="{StaticResource AppSlider}" Minimum="5" Maximum="90" TickFrequency="5"
+                    <Slider AutomationProperties.Name="Work interval in minutes" Style="{StaticResource AppSlider}" Minimum="5" Maximum="90" TickFrequency="5"
                             IsSnapToTickEnabled="True" Value="{Binding WorkMinutes, Mode=TwoWay}" />
                     <Grid Margin="0,5,0,0">
                         <TextBlock Text="Short break" Style="{StaticResource SettingLabel}" FontSize="11" />
                         <TextBlock Text="{Binding ShortBreakSeconds, StringFormat={}{0} sec}" HorizontalAlignment="Right"
                                    FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" />
                     </Grid>
-                    <Slider Style="{StaticResource AppSlider}" Minimum="5" Maximum="300" TickFrequency="5"
+                    <Slider AutomationProperties.Name="Short break in seconds" Style="{StaticResource AppSlider}" Minimum="5" Maximum="300" TickFrequency="5"
                             IsSnapToTickEnabled="True" Value="{Binding ShortBreakSeconds, Mode=TwoWay}" />
                     <Grid Margin="0,5,0,0">
                         <TextBlock Text="Long break" Style="{StaticResource SettingLabel}" FontSize="11" />
                         <TextBlock Text="{Binding LongBreakMinutes, StringFormat={}{0} min}" HorizontalAlignment="Right"
                                    FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" />
                     </Grid>
-                    <Slider Style="{StaticResource AppSlider}" Minimum="1" Maximum="30" TickFrequency="1"
+                    <Slider AutomationProperties.Name="Long break in minutes" Style="{StaticResource AppSlider}" Minimum="1" Maximum="30" TickFrequency="1"
                             IsSnapToTickEnabled="True" Value="{Binding LongBreakMinutes, Mode=TwoWay}" />
                     <Grid Margin="0,5,0,0">
                         <TextBlock Text="Long break every" Style="{StaticResource SettingLabel}" FontSize="11" />
                         <TextBlock Text="{Binding LongBreakEvery, StringFormat={}{0} breaks}" HorizontalAlignment="Right"
                                    FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" />
                     </Grid>
-                    <Slider Style="{StaticResource AppSlider}" Minimum="2" Maximum="12" TickFrequency="1"
+                    <Slider AutomationProperties.Name="Work intervals before a long break" Style="{StaticResource AppSlider}" Minimum="2" Maximum="12" TickFrequency="1"
                             IsSnapToTickEnabled="True" Value="{Binding LongBreakEvery, Mode=TwoWay}" />
                     <Grid Margin="0,5,0,0">
                         <TextBlock Text="Warning before a break" Style="{StaticResource SettingLabel}" FontSize="11" />
                         <TextBlock Text="{Binding PreBreakSeconds, StringFormat={}{0} sec}" HorizontalAlignment="Right"
                                    FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" />
                     </Grid>
-                    <Slider Style="{StaticResource AppSlider}" Minimum="0" Maximum="60" TickFrequency="15"
+                    <Slider AutomationProperties.Name="Warning before a break in seconds" Style="{StaticResource AppSlider}" Minimum="0" Maximum="60" TickFrequency="15"
                             IsSnapToTickEnabled="True" Value="{Binding PreBreakSeconds, Mode=TwoWay}" />
                 </StackPanel>
             </Border>
@@ -184,7 +184,7 @@
                         <TextBlock Text="{Binding IdleMinutes, StringFormat={}{0} min}" HorizontalAlignment="Right"
                                    FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" />
                     </Grid>
-                    <Slider Style="{StaticResource AppSlider}" Minimum="1" Maximum="15" TickFrequency="1"
+                    <Slider AutomationProperties.Name="Idle time before pausing in minutes" Style="{StaticResource AppSlider}" Minimum="1" Maximum="15" TickFrequency="1"
                             IsSnapToTickEnabled="True" Value="{Binding IdleMinutes, Mode=TwoWay}"
                             Visibility="{Binding PauseWhenIdle, Converter={StaticResource BoolToVisibility}}" />
                     <ToggleButton Style="{StaticResource SwitchToggle}" Content="Restart interval after away" FontSize="11"

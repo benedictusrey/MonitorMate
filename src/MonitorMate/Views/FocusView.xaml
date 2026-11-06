@@ -107,14 +107,14 @@
                         <TextBlock Text="{Binding DimText}" HorizontalAlignment="Right" FontSize="11"
                                    Foreground="{StaticResource AmberBrush}" />
                     </Grid>
-                    <Slider Style="{StaticResource AppSlider}" Minimum="20" Maximum="85" TickFrequency="1"
+                    <Slider AutomationProperties.Name="Surrounding screen dimming" Style="{StaticResource AppSlider}" Minimum="20" Maximum="85" TickFrequency="1"
                             IsSnapToTickEnabled="True" Value="{Binding DimPercent, Mode=TwoWay}" />
                     <Grid Margin="0,3,0,0">
                         <TextBlock Text="Reading band height" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" />
                         <TextBlock Text="{Binding BandHeight, StringFormat={}{0} px}" HorizontalAlignment="Right"
                                    FontSize="11" Foreground="{StaticResource TextMutedBrush}" />
                     </Grid>
-                    <Slider Style="{StaticResource AppSlider}" Minimum="120" Maximum="500" TickFrequency="10"
+                    <Slider AutomationProperties.Name="Reading band height" Style="{StaticResource AppSlider}" Minimum="120" Maximum="500" TickFrequency="10"
                             IsSnapToTickEnabled="True" Value="{Binding BandHeight, Mode=TwoWay}" />
                     <Grid Margin="0,3,0,0">
                         <Grid.ColumnDefinitions>
@@ -155,7 +155,7 @@
                         <TextBlock Text="{Binding DurationText}" HorizontalAlignment="Right" FontSize="11"
                                    Foreground="{StaticResource TextSecondaryBrush}" />
                     </Grid>
-                    <Slider Style="{StaticResource AppSlider}" Minimum="5" Maximum="90" TickFrequency="5"
+                    <Slider AutomationProperties.Name="Focus session length in minutes" Style="{StaticResource AppSlider}" Minimum="5" Maximum="90" TickFrequency="5"
                             IsSnapToTickEnabled="True" Value="{Binding DefaultMinutes, Mode=TwoWay}" />
                     <Border Background="{StaticResource InputBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
                             CornerRadius="7" Padding="9" Margin="0,7,0,0">

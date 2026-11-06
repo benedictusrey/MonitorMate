@@ -1,5 +1,15 @@
 # Changelog
 
+## v1.0.0 startup and text refresh, 6 November 2026
+
+- Restore saved per-display values on launch, including custom adjustments.
+- Launch self-contained packages directly through their native apphost.
+- Clarify sign-in launch, restoration and schedule precedence in Settings.
+- Fix black display-selector labels and corrupted loading text.
+- Wrap preset descriptions and name slider/text inputs for accessibility.
+- Check all seven pages at minimum, default and wider content sizes.
+
+
 ## v1.0.0 compatibility and documentation refresh
 
 - Bound software gamma ramps to Windows safety limits and report reduced adjustments.

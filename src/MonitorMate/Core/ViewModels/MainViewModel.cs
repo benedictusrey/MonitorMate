@@ -21,7 +21,7 @@ public sealed class MainViewModel : ObservableObject, IDisposable
     private object? _currentPage;
     private bool _isBusy = true;
     private bool _isInitialized;
-    private string _loadingText = "Reading your displaysâ€¦";
+    private string _loadingText = "Reading your displays...";
     private string _statusHeadline = "Getting ready";
     private string _statusDetail = "MonitorMate is checking the display control paths.";
     private string _nextBreakText = "Reminders are starting";
@@ -142,7 +142,7 @@ public sealed class MainViewModel : ObservableObject, IDisposable
         try
         {
             IsBusy = true;
-            LoadingText = "Reading your displays and control pathsâ€¦";
+            LoadingText = "Reading your displays and control paths...";
             await _services.Comfort.InitializeAsync();
             DisplaysPage.RebuildCards();
             TodayPage.RefreshAll();
@@ -163,7 +163,7 @@ public sealed class MainViewModel : ObservableObject, IDisposable
                 }
                 else if (_services.Settings.Settings.RestoreOnLaunch)
                 {
-                    await _services.Comfort.ApplyPresetAsync(_services.Settings.Settings.LastPresetId);
+                    await _services.Comfort.RestoreSavedSettingsAsync();
                 }
             }
 
@@ -264,7 +264,7 @@ public sealed class MainViewModel : ObservableObject, IDisposable
             }
             else
             {
-                await _services.Comfort.ApplyPresetAsync(_services.Settings.Settings.LastPresetId);
+                await _services.Comfort.RestoreSavedSettingsAsync();
             }
 
             UpdateHeader();

@@ -35,6 +35,7 @@ The source uses [MIT](../LICENSE), credited to Benedictus RH (@benedictusrey).
 | [docs/RELEASE_NOTES.md](RELEASE_NOTES.md) |
 | [docs/RELEASE_READINESS.md](RELEASE_READINESS.md) |
 | [docs/REVERSE_ENGINEERING.md](REVERSE_ENGINEERING.md) |
+| [docs/STARTUP_UI_AUDIT.md](STARTUP_UI_AUDIT.md) |
 | [docs/SIGNING.md](SIGNING.md) |
 | [docs/VERIFICATION.md](VERIFICATION.md) |
 | [docs/adr/0001-wpf-and-native-control.md](adr/0001-wpf-and-native-control.md) |

@@ -18,22 +18,24 @@
             <Border Style="{StaticResource CardBorder}" Padding="14" Margin="0,0,10,0">
                 <StackPanel>
                     <TextBlock Text="General" Style="{StaticResource H2}" />
-                    <TextBlock Text="These apply the next time MonitorMate starts." FontSize="11"
+                    <TextBlock Text="Choose how MonitorMate starts and stays available." FontSize="11"
                                Foreground="{StaticResource TextMutedBrush}" Margin="0,2,0,8" />
-                    <ToggleButton Style="{StaticResource SwitchToggle}" Content="Start with Windows" FontSize="11.2"
+                    <ToggleButton Style="{StaticResource SwitchToggle}" Content="Launch at Windows sign-in" FontSize="11.2"
                                   IsChecked="{Binding StartWithWindows, Mode=TwoWay}"
                                   Visibility="{Binding CanStartWithWindows, Converter={StaticResource BoolToVisibility}}" />
                     <TextBlock Text="{Binding StartupError}" FontSize="11" Foreground="{StaticResource DangerBrush}"
                                TextWrapping="Wrap" Margin="0,2,0,0"
                                Visibility="{Binding StartupError, Converter={StaticResource StringToVisibility}}" />
-                    <ToggleButton Style="{StaticResource SwitchToggle}" Content="Start minimized to the tray" FontSize="11.2"
+                    <TextBlock Text="Launching the app does not apply a profile by itself." Style="{StaticResource SettingHint}" />
+                    <ToggleButton Style="{StaticResource SwitchToggle}" Content="Restore my last profile on launch" FontSize="11.2"
+                                  IsChecked="{Binding RestoreOnLaunch, Mode=TwoWay}" Margin="0,9,0,0" />
+                    <TextBlock Text="{Binding StartupSummary}" Style="{StaticResource SettingHint}" />
+                    <ToggleButton Style="{StaticResource SwitchToggle}" Content="Start in tray when opened manually" FontSize="11.2"
                                   IsChecked="{Binding StartMinimized, Mode=TwoWay}" Margin="0,7,0,0" />
                     <ToggleButton Style="{StaticResource SwitchToggle}" Content="Keep running when I close" FontSize="11.2"
                                   IsChecked="{Binding CloseToTray, Mode=TwoWay}" Margin="0,7,0,0" />
                     <ToggleButton Style="{StaticResource SwitchToggle}" Content="Sound cues for breaks" FontSize="11.2"
                                   IsChecked="{Binding SoundEnabled, Mode=TwoWay}" Margin="0,7,0,0" />
-                    <ToggleButton Style="{StaticResource SwitchToggle}" Content="Restore my last comfort" FontSize="11.2"
-                                  IsChecked="{Binding RestoreOnLaunch, Mode=TwoWay}" Margin="0,7,0,0" />
                     <ToggleButton Style="{StaticResource SwitchToggle}" Content="Reduce motion" FontSize="11.2"
                                   IsChecked="{Binding ReducedMotion, Mode=TwoWay}" Margin="0,7,0,0" />
                 </StackPanel>
@@ -49,7 +51,7 @@
                             RequestNavigate="Credit_RequestNavigate"
                             AutomationProperties.Name="@benedictusrey on GitHub">@benedictusrey</Hyperlink>
                     </TextBlock>
-                    <TextBlock Text="Your MonitorMate lives in the sidebar. It watches the light and the clock so you can keep working."
+                    <TextBlock Text="MonitorMate adjusts supported displays and keeps reminders local. Hardware support depends on the monitor and driver."
                                FontSize="11" Foreground="{StaticResource TextMutedBrush}" TextWrapping="Wrap" Margin="0,5,0,0" />
                     <Border Height="1" Background="{StaticResource BorderBrush}" Margin="0,8,0,7" />
                     <TextBlock Text="Your data" FontSize="11" Foreground="{StaticResource TextMutedBrush}" />
@@ -93,7 +95,7 @@
                                     <TextBlock Text="{Binding Name}" FontSize="11" FontWeight="SemiBold" />
                                     <TextBlock Text="{Binding Description}" FontSize="11" Foreground="{StaticResource TextMutedBrush}" Margin="0,1,0,0" />
                                 </StackPanel>
-                                <TextBox Grid.Column="1" Style="{StaticResource AppTextBox}" Text="{Binding Gesture, UpdateSourceTrigger=LostFocus}"
+                                <TextBox AutomationProperties.Name="{Binding Name}" Grid.Column="1" Style="{StaticResource AppTextBox}" Text="{Binding Gesture, UpdateSourceTrigger=LostFocus}"
                                          Margin="10,0,0,0" Padding="7,4" FontSize="11" VerticalAlignment="Top" />
                                 <TextBlock Grid.Column="2" Text="{Binding Error}" FontSize="11" Foreground="{StaticResource DangerBrush}"
                                            Margin="8,0,0,0" VerticalAlignment="Center" MaxWidth="160" TextWrapping="Wrap" />

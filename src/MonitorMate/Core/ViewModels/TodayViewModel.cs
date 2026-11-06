@@ -145,7 +145,8 @@ public sealed class TodayViewModel : ObservableObject, IDisposable
 
     private void ApplySchedule(ScheduleSnapshot snapshot)
     {
-        CurrentPeriod = snapshot.Enabled ? snapshot.PeriodName : "Manual";
+        CurrentPeriod = snapshot.Enabled ? snapshot.PeriodName
+            : _services.Settings.Settings.AutomaticDisplayControlAllowed && _services.Settings.Settings.RestoreOnLaunch ? "Saved" : "Manual";
         ScheduleNextText = snapshot.Enabled ? $"Next change {snapshot.NextChangeText}" : "Schedule is off";
         SunriseText = snapshot.SunriseText;
         SunsetText = snapshot.SunsetText;

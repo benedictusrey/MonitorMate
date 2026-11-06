@@ -79,6 +79,8 @@ public sealed class SettingsViewModel : ObservableObject
         BuildHotkeyRows();
         RefreshDiagnostics();
         services.Comfort.StatesRebuilt += (_, _) => RefreshDiagnostics();
+        services.Comfort.StateChanged += (_, _) => OnPropertyChanged(nameof(StartupSummary));
+        services.Schedule.SnapshotChanged += (_, _) => OnPropertyChanged(nameof(StartupSummary));
         CopyDiagnosticsCommand = new RelayCommand(CopyDiagnostics);
         ExportDiagnosticsCommand = new RelayCommand(ExportDiagnostics);
         OpenDataFolderCommand = new RelayCommand(OpenDataFolder);
@@ -112,6 +114,19 @@ public sealed class SettingsViewModel : ObservableObject
     public bool IsDiagnosticsOpen { get => _isDiagnosticsOpen; set => SetProperty(ref _isDiagnosticsOpen, value); }
     public bool CanStartWithWindows => !AppEnvironment.IsPackaged;
 
+    public string StartupSummary
+    {
+        get
+        {
+            var settings = _services.Settings.Settings;
+            var launch = StartWithWindows ? "Starts in the tray at Windows sign-in. " : "Automatic launch is off. ";
+            if (!settings.AutomaticDisplayControlEnabled) return launch + "Display changes stay manual; enable profile restore below to apply saved settings on launch.";
+            if (settings.IsPaused) return launch + "Care is paused; saved display settings will not be applied.";
+            if (settings.ScheduleEnabled) return launch + "Your daily schedule takes priority over last-profile restoration.";
+            return launch + "Restores your saved profile and per-display adjustments on launch.";
+        }
+    }
+
     public bool StartWithWindows
     {
         get => _startWithWindows;
@@ -130,6 +145,7 @@ public sealed class SettingsViewModel : ObservableObject
                 OnPropertyChanged();
                 StartupError = "Windows did not accept the startup entry. Try again, or add MonitorMate to Startup apps in Windows Settings.";
             }
+            OnPropertyChanged(nameof(StartupSummary));
         }
     }
 
@@ -199,6 +215,7 @@ public sealed class SettingsViewModel : ObservableObject
             }
             else if (!settings.ScheduleEnabled) settings.AutomaticDisplayControlAllowed = false;
             _services.Settings.SaveDebounced();
+            OnPropertyChanged(nameof(StartupSummary));
         }
     }
 
@@ -230,6 +247,7 @@ public sealed class SettingsViewModel : ObservableObject
         OnPropertyChanged(nameof(ReducedMotion));
         OnPropertyChanged(nameof(RestoreOnLaunch));
         OnPropertyChanged(nameof(HotkeysEnabled));
+        OnPropertyChanged(nameof(StartupSummary));
     }
 
     private void BuildHotkeyRows()
@@ -298,6 +316,9 @@ public sealed class SettingsViewModel : ObservableObject
 
     public void RefreshPage()
     {
+        _startWithWindows = _services.Startup.IsEnabled();
+        OnPropertyChanged(nameof(StartWithWindows));
+        LoadFromSettings();
         RefreshDiagnostics();
         UpdateConflicts();
     }

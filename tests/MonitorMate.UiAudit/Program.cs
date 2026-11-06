@@ -12,6 +12,22 @@ using MonitorMate.Views;
 
 internal static class Program
 {
+    private static int ReviewText(UserControl view, string page, double width)
+    {
+        var failures = 0;
+        foreach(var text in Descendants(view).OfType<TextBlock>().Where(t => t.Visibility == Visibility.Visible && t.ActualWidth > 0 && t.ActualHeight > 0 && !string.IsNullOrWhiteSpace(t.Text)))
+        {
+            if(text.Foreground is SolidColorBrush brush && brush.Color == Colors.Black)
+            { failures++; Console.WriteLine($"FAIL {page} at {width}: black text: {text.Text}"); }
+            if(text.TextWrapping != TextWrapping.NoWrap || text.TextTrimming != TextTrimming.None || text.ActualWidth <= 0) continue;
+            var formatted = new FormattedText(text.Text, System.Globalization.CultureInfo.CurrentCulture, text.FlowDirection,
+                new Typeface(text.FontFamily,text.FontStyle,text.FontWeight,text.FontStretch),text.FontSize,text.Foreground,96.0/96);
+            if(formatted.Width > text.ActualWidth + 2)
+                Console.WriteLine($"REVIEW text metrics {page} at {width}: {text.Text}");
+        }
+        return failures;
+    }
+
     private static IEnumerable<DependencyObject> Descendants(DependencyObject parent)
     {
         for(var i=0;i<VisualTreeHelper.GetChildrenCount(parent);i++)
@@ -63,6 +79,20 @@ internal static class Program
             { failures++; Console.WriteLine("FAIL Empty display page offers a selection instead of recovery."); }
             var small = Descendants(view).OfType<TextBlock>().Count(t => t.Visibility == Visibility.Visible && !string.IsNullOrWhiteSpace(t.Text) && t.FontSize < 11);
             if (small > 0) { failures++; Console.WriteLine($"FAIL {name}: {small} labels below 11 DIPs."); }
+            foreach(var input in Descendants(view).OfType<Control>().Where(control => control is Slider || control is TextBox))
+                if(string.IsNullOrWhiteSpace(System.Windows.Automation.AutomationProperties.GetName(input)))
+                { failures++; Console.WriteLine($"FAIL {name}: input has no accessible name."); }
+            foreach(var width in new[] { 684.0, 1064.0 })
+            {
+                surface.Width=width; surface.Measure(new Size(width,double.PositiveInfinity));
+                var resizedHeight=Math.Ceiling(surface.DesiredSize.Height);
+                surface.Arrange(new Rect(0,0,width,resizedHeight)); surface.UpdateLayout();
+                app.Dispatcher.Invoke(() => { },DispatcherPriority.ContextIdle);
+                var resized=new RenderTargetBitmap((int)width,(int)resizedHeight,96,96,PixelFormats.Pbgra32); resized.Render(surface);
+                var resizedEncoder=new PngBitmapEncoder(); resizedEncoder.Frames.Add(BitmapFrame.Create(resized));
+                using var resizedFile=File.Create(Path.Combine(output,$"{name}-{width}.png")); resizedEncoder.Save(resizedFile);
+                failures+=ReviewText(view,name,width);
+            }
 
         }
         var rejected = new MonitorMate.Core.Models.DisplayState
@@ -78,13 +108,24 @@ internal static class Program
         ((List<MonitorMate.Core.Models.DisplayState>)services.Comfort.States).Add(rejected);
         main.DisplaysPage.RebuildCards();
         var rejectedView = new DisplaysView { DataContext=main.DisplaysPage };
+        TextElement.SetForeground(rejectedView,(Brush)app.FindResource("TextPrimaryBrush"));
         rejectedView.Measure(new Size(800,double.PositiveInfinity));
         rejectedView.Arrange(new Rect(0,0,800,Math.Ceiling(rejectedView.DesiredSize.Height))); rejectedView.UpdateLayout();
         app.Dispatcher.Invoke(() => { },DispatcherPriority.ContextIdle);
         var status = Descendants(rejectedView).OfType<TextBlock>().FirstOrDefault(text => text.Text == rejected.Status);
+        foreach (var title in Descendants(rejectedView).OfType<TextBlock>().Where(text => text.Text == "Display 1"))
+            if(title.Foreground is not SolidColorBrush titleBrush || titleBrush.Color == Colors.Black)
+            { failures++; Console.WriteLine("FAIL Display selector title inherits black text on the dark surface."); }
         if(status is null || status.TextWrapping != TextWrapping.Wrap)
         { failures++; Console.WriteLine("FAIL Rejected display status is missing or cannot wrap."); }
         Console.WriteLine("RENDER displays with rejected driver: " + rejectedView.ActualHeight);
+        foreach(var input in Descendants(rejectedView).OfType<Slider>())
+            if(string.IsNullOrWhiteSpace(System.Windows.Automation.AutomationProperties.GetName(input)))
+            { failures++; Console.WriteLine("FAIL Display slider has no accessible name."); }
+        var displayBitmap=new RenderTargetBitmap(800,(int)Math.Ceiling(rejectedView.ActualHeight),96,96,PixelFormats.Pbgra32); displayBitmap.Render(rejectedView);
+        var displayEncoder=new PngBitmapEncoder(); displayEncoder.Frames.Add(BitmapFrame.Create(displayBitmap));
+        using(var displayFile=File.Create(Path.Combine(output,"displays-populated.png"))) displayEncoder.Save(displayFile);
+        failures+=ReviewText(rejectedView,"displays-populated",800);
         foreach (var style in new[] { "FlatButton", "PrimaryButton", "SecondaryButton", "DangerButton", "IconButton" })
         {
             var button = new Button { Content="Test", Style=(Style)app.FindResource(style), IsEnabled=false };

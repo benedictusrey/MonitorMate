@@ -4,8 +4,8 @@ using System.Reflection;
 namespace MonitorMate.Core.Services;
 
 /// <summary>
-/// The shipped app is a managed DLL so Windows can launch it through the
-/// signed .NET host instead of an unsigned apphost executable.
+/// Uses the native apphost for self-contained packages and a hidden launcher
+/// for framework-dependent DLL builds.
 /// </summary>
 public static class AppLaunch
 {
@@ -31,12 +31,13 @@ public static class AppLaunch
 
     public static string StartupCommand()
     {
+        if (!IsDotnetHost) return $"\"{HostPath}\" --tray";
         if (LauncherPath is { } launcher)
         {
             return $"\"{PowerShellPath}\" -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File \"{launcher}\" --tray";
         }
 
-        if (!IsDotnetHost || EntryDll is null)
+        if (EntryDll is null)
         {
             return $"\"{HostPath}\" --tray";
         }
@@ -46,6 +47,14 @@ public static class AppLaunch
 
     public static ProcessStartInfo CreateRestartStartInfo()
     {
+        if (!IsDotnetHost)
+        {
+            return new ProcessStartInfo(HostPath)
+            {
+                UseShellExecute = false,
+                WorkingDirectory = AppContext.BaseDirectory
+            };
+        }
         if (LauncherPath is { } launcher)
         {
             return new ProcessStartInfo(PowerShellPath,
@@ -58,7 +67,7 @@ public static class AppLaunch
             };
         }
 
-        if (IsDotnetHost && EntryDll is not null)
+        if (EntryDll is not null)
         {
             return new ProcessStartInfo(HostPath, $"\"{EntryDll}\"")
             {

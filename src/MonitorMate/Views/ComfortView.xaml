@@ -61,7 +61,7 @@
                                         </Grid>
                                         <TextBlock Grid.Row="1" Text="{Binding Description}" FontSize="11"
                                                    Foreground="{StaticResource TextMutedBrush}" TextWrapping="Wrap"
-                                                   Margin="0,3,0,0" MaxHeight="26" />
+                                                   Margin="0,3,0,0" />
                                         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,5,0,0">
                                             <TextBlock Text="{Binding TemperatureText}" FontFamily="{StaticResource DisplayFont}"
                                                        FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" />
@@ -106,17 +106,17 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Margin="0,0,6,0">
                             <TextBlock Text="Daylight" FontSize="11" Foreground="{StaticResource TextMutedBrush}" Margin="0,0,0,3" />
-                            <TextBox Style="{StaticResource AppTextBox}" Text="{Binding DayStartText, UpdateSourceTrigger=LostFocus}"
+                            <TextBox AutomationProperties.Name="Daylight start time" Style="{StaticResource AppTextBox}" Text="{Binding DayStartText, UpdateSourceTrigger=LostFocus}"
                                      Padding="7,5" FontSize="11" />
                         </StackPanel>
                         <StackPanel Grid.Column="1" Margin="0,0,6,0">
                             <TextBlock Text="Evening" FontSize="11" Foreground="{StaticResource TextMutedBrush}" Margin="0,0,0,3" />
-                            <TextBox Style="{StaticResource AppTextBox}" Text="{Binding EveningStartText, UpdateSourceTrigger=LostFocus}"
+                            <TextBox AutomationProperties.Name="Evening start time" Style="{StaticResource AppTextBox}" Text="{Binding EveningStartText, UpdateSourceTrigger=LostFocus}"
                                      Padding="7,5" FontSize="11" />
                         </StackPanel>
                         <StackPanel Grid.Column="2">
                             <TextBlock Text="Night" FontSize="11" Foreground="{StaticResource TextMutedBrush}" Margin="0,0,0,3" />
-                            <TextBox Style="{StaticResource AppTextBox}" Text="{Binding NightStartText, UpdateSourceTrigger=LostFocus}"
+                            <TextBox AutomationProperties.Name="Night start time" Style="{StaticResource AppTextBox}" Text="{Binding NightStartText, UpdateSourceTrigger=LostFocus}"
                                      Padding="7,5" FontSize="11" />
                         </StackPanel>
                     </Grid>
@@ -129,12 +129,12 @@
                             </Grid.ColumnDefinitions>
                             <StackPanel Margin="0,0,6,0">
                                 <TextBlock Text="Latitude" FontSize="11" Foreground="{StaticResource TextMutedBrush}" Margin="0,0,0,3" />
-                                <TextBox Style="{StaticResource AppTextBox}" Text="{Binding LatitudeText, UpdateSourceTrigger=LostFocus}"
+                                <TextBox AutomationProperties.Name="Latitude" Style="{StaticResource AppTextBox}" Text="{Binding LatitudeText, UpdateSourceTrigger=LostFocus}"
                                          Padding="7,5" FontSize="11" />
                             </StackPanel>
                             <StackPanel Grid.Column="1">
                                 <TextBlock Text="Longitude" FontSize="11" Foreground="{StaticResource TextMutedBrush}" Margin="0,0,0,3" />
-                                <TextBox Style="{StaticResource AppTextBox}" Text="{Binding LongitudeText, UpdateSourceTrigger=LostFocus}"
+                                <TextBox AutomationProperties.Name="Longitude" Style="{StaticResource AppTextBox}" Text="{Binding LongitudeText, UpdateSourceTrigger=LostFocus}"
                                          Padding="7,5" FontSize="11" />
                             </StackPanel>
                         </Grid>

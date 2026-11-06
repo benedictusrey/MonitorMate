@@ -3,6 +3,19 @@
 MonitorMate combines display comfort and break reminders. This preview provides the full Windows app and a smaller reminder app on Linux/macOS.
 Created by **Benedictus RH (@benedictusrey)**. MIT licensed; no timed trial or expiry.
 
+## Startup and text refresh, 6 November 2026
+
+Sign-in launch and profile restoration are separate settings. Enable both to
+apply saved settings automatically after Windows sign-in. Restore now preserves
+per-display custom adjustments. A configured daily schedule takes priority;
+paused care remains paused. Self-contained installs start the native apphost
+without depending on a global .NET installation.
+
+Display-selector text uses the correct foreground. Preset descriptions wrap at
+smaller window sizes, loading messages have clean text, and slider/text inputs
+have accessible names. [Startup/UI audit](docs/STARTUP_UI_AUDIT.md) records the
+checks and remaining native acceptance limits. All versions remain v1.0.0.
+
 ## Refreshed preview, 5 November 2026
 
 All app versions and platform downloads remain **v1.0.0**, as requested by the

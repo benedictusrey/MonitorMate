@@ -43,6 +43,19 @@ skippable; closing the app stops reminders.
 
 ## Automatic changes and startup
 
+If MonitorMate is in the tray after sign-in but the display stays unchanged,
+check Settings > General. **Launch at Windows sign-in** starts the app.
+**Restore my last profile on launch** applies the saved display adjustments.
+Enable both for that behavior and approve the app's automatic-control prompt.
+The live summary explains what will happen. A daily schedule takes priority
+when enabled, and paused care remains paused. No administrator elevation is needed.
+
+Restoration uses saved per-display values, including custom brightness and warmth.
+Self-contained release builds use the native apphost; framework-dependent DLL
+copies still need the .NET Desktop Runtime. Windows Task Manager can independently
+disable an app's startup entry. MonitorMate does not override that Windows choice.
+
+
 First launch offers manual or automatic display control. You can use manual
 controls after declining automation and revisit the choice later. Scheduling
 and launch/resume restoration require app consent. Start with Windows is a

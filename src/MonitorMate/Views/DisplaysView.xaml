@@ -20,7 +20,7 @@
             </StackPanel>
         </Grid>
 
-        <ListBox ItemsSource="{Binding Displays}" SelectedItem="{Binding SelectedDisplay, Mode=TwoWay}"
+        <ListBox AutomationProperties.Name="Connected displays" ItemsSource="{Binding Displays}" SelectedItem="{Binding SelectedDisplay, Mode=TwoWay}"
                  ItemContainerStyle="{StaticResource MonitorCardContainer}"
                  Background="Transparent" BorderThickness="0" Padding="0"
                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
@@ -101,7 +101,7 @@
                         <StackPanel>
                             <TextBlock Text="{Binding SelectedDisplay.Name}" Style="{StaticResource H2}" />
                             <TextBlock Text="{Binding SelectedDisplay.ControlDetail}" FontSize="11"
-                                       Foreground="{StaticResource TextMutedBrush}" Margin="0,2,0,0" />
+                                       Foreground="{StaticResource TextMutedBrush}" TextWrapping="Wrap" Margin="0,2,0,0" />
                         </StackPanel>
                         <Border HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource PillBorder}">
                             <TextBlock Text="{Binding SelectedDisplay.ControlPathLabel}" FontSize="11"
@@ -117,7 +117,7 @@
                         <TextBlock Text="{Binding SelectedDisplay.BrightnessCaption}" Style="{StaticResource SettingLabel}" />
                         <TextBlock Grid.Column="1" Text="{Binding SelectedDisplay.BrightnessText}" Style="{StaticResource DisplayM}" />
                     </Grid>
-                    <Slider Style="{StaticResource AppSlider}" Minimum="10" Maximum="100"
+                    <Slider AutomationProperties.Name="Display brightness" Style="{StaticResource AppSlider}" Minimum="10" Maximum="100"
                             TickFrequency="1" IsSnapToTickEnabled="True"
                             Value="{Binding SelectedDisplay.Brightness, Mode=TwoWay}"
                             Margin="0,0,0,0" IsEnabled="{Binding HasSelection}" />
@@ -138,7 +138,7 @@
                             <TextBlock Text="{Binding SelectedDisplay.TemperatureText}" Style="{StaticResource DisplayM}" />
                         </StackPanel>
                     </Grid>
-                    <Slider Style="{StaticResource AppSlider}" Minimum="2700" Maximum="6500"
+                    <Slider AutomationProperties.Name="Colour temperature" Style="{StaticResource AppSlider}" Minimum="2700" Maximum="6500"
                             TickFrequency="50" IsSnapToTickEnabled="True"
                             Value="{Binding SelectedDisplay.TemperatureK, Mode=TwoWay}"
                             Margin="0,0,0,0" IsEnabled="{Binding HasSelection}" />
@@ -159,7 +159,7 @@
                                 <TextBlock Text="{Binding SelectedDisplay.ExtraDimText}" HorizontalAlignment="Right"
                                            FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" />
                             </Grid>
-                            <Slider Style="{StaticResource AppSlider}" Minimum="0" Maximum="50"
+                            <Slider AutomationProperties.Name="Extra dim" Style="{StaticResource AppSlider}" Minimum="0" Maximum="50"
                                     TickFrequency="1" IsSnapToTickEnabled="True"
                                     Value="{Binding SelectedDisplay.SoftwareDim, Mode=TwoWay}" />
                             <TextBlock Text="Below hardware minimum." FontSize="11" Foreground="{StaticResource TextMutedBrush}" />
@@ -171,7 +171,7 @@
                                 <TextBlock Text="{Binding SelectedDisplay.ContrastText}" HorizontalAlignment="Right"
                                            FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" />
                             </Grid>
-                            <Slider Style="{StaticResource AppSlider}" Minimum="0" Maximum="100"
+                            <Slider AutomationProperties.Name="Display contrast" Style="{StaticResource AppSlider}" Minimum="0" Maximum="100"
                                     TickFrequency="1" IsSnapToTickEnabled="True"
                                     Value="{Binding SelectedDisplay.Contrast, Mode=TwoWay}" />
                             <TextBlock Text="Sent over DDC/CI." FontSize="11" Foreground="{StaticResource TextMutedBrush}" />

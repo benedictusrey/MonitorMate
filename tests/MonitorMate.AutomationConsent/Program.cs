@@ -112,6 +112,18 @@ internal static class Program
             services.Settings.Replace(new AppSettings { SetupCompleted = true, ScheduleEnabled = true, RestoreOnLaunch = true });
             Require(!services.Schedule.GetSnapshot().Enabled, "Legacy flags enabled automatic control without the new approval.");
         });
+        Check("Startup summary distinguishes launch from profile restoration", () =>
+        {
+            using var services = new AppServices(); services.Settings.Replace(new AppSettings { SetupCompleted=true });
+            using var main = Create(services, () => true);
+            Require(main.SettingsPage.StartupSummary.Contains("stay manual"), "Manual launch behavior is not explained.");
+            main.SettingsPage.RestoreOnLaunch = true;
+            Require(main.SettingsPage.StartupSummary.Contains("per-display adjustments"), "Saved-profile restoration is not explained.");
+            main.TodayPage.RefreshAll();
+            Require(main.TodayPage.CurrentPeriod == "Saved", "Saved-profile mode is mislabeled as manual.");
+            main.ComfortPage.ScheduleEnabled = true;
+            Require(main.SettingsPage.StartupSummary.Contains("schedule takes priority"), "Schedule/restore precedence is hidden.");
+        });
         Check("Invalid fixed hours are rejected before saving", () =>
         {
             using var services = new AppServices(); services.Settings.Replace(new AppSettings());

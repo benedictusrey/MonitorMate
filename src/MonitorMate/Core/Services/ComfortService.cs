@@ -195,6 +195,17 @@ public sealed class ComfortService : ObservableObject, IDisposable
         await ApplyAllAsync(automatic: fromSchedule);
     }
 
+    public async Task RestoreSavedSettingsAsync()
+    {
+        var settings = _settings.Settings;
+        if (!settings.SetupCompleted || !settings.AutomaticDisplayControlAllowed || !settings.RestoreOnLaunch || IsPaused) return;
+        IsCustomMix = _states.Any(state => state.Preference.Enabled && string.Equals(state.Preference.LastPresetId, "custom", StringComparison.OrdinalIgnoreCase));
+        await ApplyAllAsync(automatic: true);
+        _log.Info(GetApplySummary("Launch restore"));
+        OnPropertyChanged(nameof(CurrentPresetName));
+        StateChanged?.Invoke(this, EventArgs.Empty);
+    }
+
     public async Task ApplyAllAsync(bool automatic = false)
     {
         await _applyGate.WaitAsync();

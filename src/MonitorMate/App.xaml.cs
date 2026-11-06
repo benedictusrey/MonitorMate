@@ -52,6 +52,11 @@ public partial class App : Application
         try
         {
             _services = new AppServices();
+            if (!AppEnvironment.IsPackaged && _services.Settings.Settings.StartWithWindows && _services.Startup.IsEnabled())
+            {
+                // Refresh an existing opt-in entry after moving or updating the app.
+                _services.Startup.SetEnabled(true);
+            }
             var showWindow = new Action(ShowMainWindow);
             var hideWindow = new Action(() => _window?.HideToTray());
             var requestExit = new Action(RequestExit);

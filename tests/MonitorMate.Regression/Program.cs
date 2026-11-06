@@ -30,6 +30,25 @@ internal static class Program
                 Require(!result.Unconfirmed, preset.Name + " was not confirmed by the simulated driver.");
             }
         });
+        Run("Launch restore preserves saved per-display adjustments", () =>
+        {
+            var fixture = Create(true, true, hardware: false);
+            fixture.Settings.Settings.RestoreOnLaunch = true;
+            fixture.Settings.Settings.ScheduleEnabled = false;
+            var state = fixture.Comfort.States[0];
+            state.Preference.Brightness = 90; state.Preference.TemperatureK = 4800;
+            state.Preference.SoftwareDim = 0; state.Preference.LastPresetId = "custom";
+            var restore = typeof(ComfortService).GetMethod("RestoreSavedSettingsAsync");
+            Require(restore is not null, "Launch restore has no path to preserve saved display values.");
+            ((Task)restore!.Invoke(fixture.Comfort, null)!).GetAwaiter().GetResult();
+            Require(state.Preference.Brightness == 90 && state.Preference.TemperatureK == 4800 && fixture.Comfort.IsCustomMix,
+                "Launch restore replaced custom values with a catalog preset or mislabeled them.");
+            Require(NativeMethods.Writes > 0, "Approved launch restore did not write the saved request.");
+            NativeMethods.Writes = 0;
+            fixture.Settings.Settings.AutomaticDisplayControlAllowed = false;
+            ((Task)restore.Invoke(fixture.Comfort, null)!).GetAwaiter().GetResult();
+            Require(NativeMethods.Writes == 0, "Saved restoration bypassed automatic-control consent.");
+        });
         Run("Deep software dimming reports its effective range limit", () =>
         {
             var fixture = Create(true, true, hardware: false);

@@ -33,7 +33,7 @@ jobs:
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
-          foreach ($project in @('Regression','AutomationConsent','Restart','UiAudit')) {
+          foreach ($project in @('Regression','AutomationConsent','Restart','UiAudit','Launch')) {
             dotnet run --project "tests/MonitorMate.$project/MonitorMate.$project.csproj" -p:PublishSingleFile=false
             if ($LASTEXITCODE -ne 0) { throw "Failed: $project" }
           }
