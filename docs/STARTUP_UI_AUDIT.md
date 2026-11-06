@@ -57,6 +57,13 @@ launch commands, consent, saved adjustments, paused/disabled guards, text colour
 input names and all seven page templates at 684, 800 and 1064 DIPs of content width.
 The source contains no replacement bitmap icons.
 
+Hosted validation also rejected a changed AppImage tool at its mutable
+`continuous` URL. Packaging now pins the official
+[appimagetool 1.9.1 release](https://github.com/AppImage/appimagetool/releases/tag/1.9.1)
+and its independently downloaded, verified SHA-256. The integrity check remains
+mandatory; no checksum bypass was added. Tag-only pushes no longer duplicate the
+already-required branch build checks.
+
 These are real WPF framework renders and controlled behavior tests. The native
 computer-use helper still cannot initialize under the current workspace policy,
 so full live pointer/keyboard traversal and Narrator acceptance are not claimed.
